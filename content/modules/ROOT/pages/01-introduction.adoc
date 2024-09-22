@@ -1,0 +1,82 @@
+
+== Introduction to OpenShift Dev Spaces
+
+=== Installing OpenShift Dev Spaces
+
+* Begin by logging into your OpenShift console. Once logged in, navigate to the Operator Hub. This is where you can find various operators that can be deployed on your OpenShift cluster.
+* In the search bar within the Operator Hub, type “Dev Spaces”. This will filter the list of available operators.
+* Look for the “Red Hat OpenShift Dev Spaces” operator in the search results. This is the official Red Hat operator for Dev Spaces.
+
+image::search_dev_spaces_operator.png[]
+
+* Click on the operator to view more details. You’ll find information about what the operator does, along with its features and configuration options.
+* Click on the Install button.
+
+image::dev_spaces_operator.png[]
+
+* Follow the on-screen instructions to configure the installation settings. 
+* Keep the default settings and click the Install button.
+
+image::install_dev_spaces_operator.png[]
+
+* A few moments later the Dev Spaces Operator will be ready for use.
+
+image::install_dev_spaces_operator.png[]
+
+* Click on the **View installed Operators in Namespace openshift-operators** link to switch to the Installed Operators view.
+* Note that two new Operators have been installed: Red Hat OpenShift Dev Spaces Operator and DevWorkspace Operator
+
+image::installed_operators.png[]
+
+* In the Provided APIs Column of the Red Hat OpenShift Dev Spaces Operator, click on “Red Hat OpenShift Dev Spaces Instance Specification” link.
+
+* Click the **Create CheCluster** button.
+
+image::create_checluster.png[]
+
+* Click the **Create CheCluster** button.
+
+image::checluster_form.png[]
+
+* Keep the default values and click **Create**.
+
+* Now switch to Topology view in the Developer Perspective to monitor the pods as they start up.
+
+image::dev_spaces_topology_view.png[]
+
+---
+
+=== What is a Workspace?
+
+* A workspace is essentially a containerized instance of a development environment dedicated to a single user. This powerful feature allows developers like you to access, write, build, run, or debug code—all within what we call the “inner loop” of development.
+
+* Workspaces are designed to maximize developer productivity by including all the necessary tools within easy reach. Here’s what a typical workspace might include:
+
+	•	**Language Runtime/Development Kits**: Whether you’re coding in Node.js, Java (using JDKs), or Python, the right runtime environments and development kits are ready for you.
+	•	**Build Tools**: Tools like Maven or Gradle are available to handle project builds efficiently, ensuring that you can compile and prepare your applications with ease.
+	•	**Command Line Interfaces (CLIs)**: Direct access to OpenShift CLIs and other essential tools right from your workspace, enabling seamless interaction with your applications and services.
+	•	**Binaries**: Essential binaries to run various processes such as application servers or message brokers are part of your workspace, ensuring you have everything you need to get your applications up and running.
+
+* What makes **OpenShift Dev Spaces** particularly flexible and powerful is its extensibility through plug-ins. These plug-ins can be sourced from a plug-in registry, and include:
+
+	•	Dev Spaces Plug-ins: Native plug-ins designed specifically for enhancing the functionality of your Dev Spaces environment.
+	•	VSCode Plug-ins: Yes, you read that correctly! It’s possible to integrate well-known VSCode plug-ins into your workspace, bringing the power and familiarity of Visual Studio Code into your containerized development environment.
+
+
+---
+
+=== Development Environment as Code with Devfiles
+
+* The concept of “Development Environment as Code” represents a significant shift in the way we set up and manage development environments. By treating these configurations as code, developers can leverage automation, apply version control, and ensure consistency across various setups. This approach simplifies the complex process of configuring individual environments and aligns it with modern DevOps practices.
+
+* At the heart of this paradigm is the **Devfile**, a powerful YAML configuration file used by **OpenShift Dev Spaces**. Devfiles act as comprehensive blueprints for setting up development environments. They not only define the runtime environment but also include the necessary tools and commands needed for a project.
+
+==== Features and Benefits of Devfiles
+
+	•	Automation-Ready: Devfiles are designed to automate the setup of development environments, reducing manual configuration errors and speeding up the onboarding process for new developers.
+	•	Version Controlled: Like any other piece of code, Devfiles can be versioned using standard source control tools. This allows you to track changes, roll back to previous configurations, and ensure that every team member is working with the same environment settings.
+	•	Consistent & Portable: Devfiles provide a consistent development environment across different machines or platforms. This portability ensures that developers can work seamlessly, irrespective of whether they are coding locally or in a cloud environment.
+
+==== Anatomy of a Devfile
+
+
