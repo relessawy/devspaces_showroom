@@ -1,5 +1,9 @@
 
-= Introduction to OpenShift Dev Spaces
+= Supercharge Developer Experience with OpenShift Dev Spaces
+
+* OpenShift Dev Spaces is an integrated development environment hosted within the Red Hat OpenShift platform, designed to streamline and enhance the developer experience in a cloud-native landscape. 
+* This innovative tool allows developers to quickly spin up containerized development environments, providing instant access to a wide range of resources and tools directly in the cloud. 
+* In this module, we will guide you through the installation process, explain how to navigate the OpenShift Dev Spaces interface, and delve into its core components. 
 
 == Installing OpenShift Dev Spaces
 
@@ -100,7 +104,6 @@ image::dev_spaces_components.png[]
 	•	Dev Spaces Plug-ins: Native plug-ins designed specifically for enhancing the functionality of your Dev Spaces environment.
 	•	VSCode Plug-ins: Yes, you read that correctly! It’s possible to integrate well-known VSCode plug-ins into your workspace, bringing the power and familiarity of Visual Studio Code into your containerized development environment.
 
-
 ---
 
 == Development Environment as Code with Devfiles
@@ -146,4 +149,4 @@ image::devfile_anatomy.png[]
 
 ---
 
-== Section Conclusion
+== Module Conclusion

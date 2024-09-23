@@ -1,0 +1,76 @@
+
+= Developer Onboarding with Dev Spaces
+
+* Imagine you are a new developer joining a project called GuestBook. Your onboarding is going to be quick and seamless, thanks to OpenShift Dev Spaces. Here’s how your journey begins:
+* Your manager has provided you with a link to access **OpenShift Dev Spaces** through your browser. 
+* The moment you click the link, the **Dev Spaces Gateway** authenticates your credentials and directs your request to the Dev Spaces Server. 
+* This server then processes your request and sends back the necessary information to display the **DevSpaces Dashboard** in your browser.
+* Once on the dashboard, you’ll see the GuestBook project listed. Clicking on it will initiate the next step: the Dev Spaces Server reads the devfile for the GuestBook project. 
+* This devfile contains all the essential information about runtimes, dependencies, and development tools that are required to start working on the project.
+* From there, the **Dev Spaces Server** creates a dedicated Project in OpenShift just for you, and spins up a workspace configured exactly as specified in the devfile.
+* This entire process ensures that you have the perfect development environment tailored for your project, without needing to set anything up manually.
+
+image::developer_onboarding.png[]
+
+* Now, let’s try this out hands-on in this module and see how OpenShift Dev Spaces simplifies your onboarding and development process!
+
+---
+
+== Developer Onboarding 
+
+* To access the OpenShift Dev Spaces Dashboard, click on the route of the **che_gateway** pod
+
+image::che_gateway_pod.png
+
+---
+
+* You will be asked to Log in using your OpenShift credentials, use the following:
+** username: user1
+** password: openshift
+
+image::login_with_openshift.png[]
+
+---
+
+* On the “Authorize Access” screen, click the **Allow Select Permissions** button to grant the necessary permissions.
+
+image::authorize_access.png[]
+
+---
+
+* You will now be greeted by the **OpenShift Dev Spaces dashboard**, your central hub for managing workspaces and projects.
+
+image:: dev_spaces_dashboard.png
+
+* Let’s now create your first workspace for the GuestBook project.
+* Paste the following link to the GitHub repository into the field **Git Repo URL** within the dashboard to import the project.
+** https://github.com/relessawy/devspaces_guestbook/
+* Click the **Create & Open** button
+
+image::import_from_git.png[]
+
+---
+
+* It will take the Dev Spaces server a few minutes to process the devfile and spin up your workspace
+
+image::starting_workspace.png[]
+
+---
+
+* A pop-up will appear asking, “Do you trust the authors of the files in this folder?” This is a standard security measure to ensure that the files you are about to use are safe and come from a reliable source.
+* Click the **Yes, I trust the authors** button.
+
+image::trust_authors.png[]
+
+---
+
+* Now that we’ve set up the workspace, let’s quickly switch back to the OpenShift console to see what happened behind the scenes during this process.
+* In the top left corner of your OpenShift console, click the **Project dropdown list**. This list shows all the available projects currently deployed on your OpenShift cluster.
+* You will notice a new project called **user1-devspaces** has been automatically created for you. This project was provisioned by OpenShift Dev Spaces to serve as your personal development space, based on the devfile configuration.
+
+image::project_list.png[]
+
+* Select **user1-devspaces** to switch to this project.
+
+
+---
