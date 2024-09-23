@@ -1,5 +1,5 @@
 site:
-  title: "Super Charge Developer Experience with OpenShift Dev Spaces"
+  title: "Supercharge Developer Experience with OpenShift Dev Spaces"
   url: https://redhat-scholars.github.io/course-template
   start_page: modules::index.adoc
 

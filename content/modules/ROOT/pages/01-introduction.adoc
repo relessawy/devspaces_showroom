@@ -1,52 +1,89 @@
 
-== Introduction to OpenShift Dev Spaces
+= Introduction to OpenShift Dev Spaces
 
-=== Installing OpenShift Dev Spaces
+== Installing OpenShift Dev Spaces
 
-* Begin by logging into your OpenShift console. Once logged in, navigate to the Operator Hub. This is where you can find various operators that can be deployed on your OpenShift cluster.
-* In the search bar within the Operator Hub, type “Dev Spaces”. This will filter the list of available operators.
+* Begin by logging into your OpenShift console. 
+* Once logged in, navigate to the **Operator Hub**. This is where you can find various operators that can be deployed on your OpenShift cluster.
+* In the search bar within the **Operator Hub**, type “Dev Spaces”. This will filter the list of available operators.
 * Look for the “Red Hat OpenShift Dev Spaces” operator in the search results. This is the official Red Hat operator for Dev Spaces.
 
 image::search_dev_spaces_operator.png[]
 
+---
+
 * Click on the operator to view more details. You’ll find information about what the operator does, along with its features and configuration options.
-* Click on the Install button.
+* Click on the **Install** button.
 
 image::dev_spaces_operator.png[]
 
+---
+
 * Follow the on-screen instructions to configure the installation settings. 
-* Keep the default settings and click the Install button.
+* Keep the default settings and click the **Install** button.
 
 image::install_dev_spaces_operator.png[]
 
-* A few moments later the Dev Spaces Operator will be ready for use.
+---
 
-image::install_dev_spaces_operator.png[]
-
+* A few moments later the **Dev Spaces Operator** will be ready for use.
 * Click on the **View installed Operators in Namespace openshift-operators** link to switch to the Installed Operators view.
-* Note that two new Operators have been installed: Red Hat OpenShift Dev Spaces Operator and DevWorkspace Operator
+* Note that two new Operators have been installed: Red Hat OpenShift Dev Spaces Operator and DevWorkspace Operator.
+* In the Provided APIs Column of the Red Hat OpenShift Dev Spaces Operator, click on “Red Hat OpenShift Dev Spaces Instance Specification” link.
 
 image::installed_operators.png[]
 
-* In the Provided APIs Column of the Red Hat OpenShift Dev Spaces Operator, click on “Red Hat OpenShift Dev Spaces Instance Specification” link.
+---
 
 * Click the **Create CheCluster** button.
 
 image::create_checluster.png[]
 
-* Click the **Create CheCluster** button.
+---
+
+* Keep the default values and click the **Create** button.
 
 image::checluster_form.png[]
 
-* Keep the default values and click **Create**.
+---
 
-* Now switch to Topology view in the Developer Perspective to monitor the pods as they start up.
+* In the Developer Perspective, switch to the Topology view to visually monitor the status of the pods.
+* Keep an eye on the pods until all are fully operational and show a status of ‘Running’.
 
 image::dev_spaces_topology_view.png[]
 
+* Now that the initial setup is complete, let's familiarize ourselves with the core five components of **OpenShift Dev Spaces**.
+
+=== 1. User Dashboard
+
+* Serves as the landing page for OpenShift DevSpaces.
+* Users access and manage their workspaces through this React application. It’s designed to provide a straightforward and effective user experience for interacting with various workspace functionalities.
+
+=== 2. Devfiles Registry
+
+* Contains templates for devfiles, which are YAML files that describe and configure a development environment specifically for an application. 
+* Devfiles make it easy to onboard a project, as they define the source code repositories, build, and runtime environments. We will dive deeper into workspaces and devfiles in the coming sections.
+
+=== 3. Plugin Registry 
+
+* Stores plugins that can be used to extend the development environment. 
+* These plugins can provide additional language support, developer tools, or connections to external services.
+
+=== 4. Dev Spaces Server
+
+ * Acts as the central hub and orchestrates the creation, management, and deletion of development workspaces. It’s responsible for managing authentication, authorization, user profiles, workspace resources, and integration with other services.
+
+ === 5. The Gateway
+
+ * Based on Traefik, serves as the secure entry point for routing traffic efficiently between the user’s workspace and external networks.
+ * It plays a pivotal role in directing requests to various DevSpaces components such as the User Dashboard, Devfile Registry, DevSpaces Server, Plugin Registry, and User Workspaces.
+* The Gateway is critical for integrating external services and tools, providing controlled access while maintaining network security and isolation essential for collaborative development activities.
+
+image::dev_spaces_components.png[]
+
 ---
 
-=== What is a Workspace?
+== What is a Workspace?
 
 * A workspace is essentially a containerized instance of a development environment dedicated to a single user. This powerful feature allows developers like you to access, write, build, run, or debug code—all within what we call the “inner loop” of development.
 
@@ -65,7 +102,7 @@ image::dev_spaces_topology_view.png[]
 
 ---
 
-=== Development Environment as Code with Devfiles
+== Development Environment as Code with Devfiles
 
 * The concept of “Development Environment as Code” represents a significant shift in the way we set up and manage development environments. By treating these configurations as code, developers can leverage automation, apply version control, and ensure consistency across various setups. This approach simplifies the complex process of configuring individual environments and aligns it with modern DevOps practices.
 
