@@ -73,7 +73,7 @@ image::dev_spaces_topology_view.png[]
 
  * Acts as the central hub and orchestrates the creation, management, and deletion of development workspaces. It’s responsible for managing authentication, authorization, user profiles, workspace resources, and integration with other services.
 
- === 5. The Gateway
+=== 5. The Gateway
 
  * Based on Traefik, serves as the secure entry point for routing traffic efficiently between the user’s workspace and external networks.
  * It plays a pivotal role in directing requests to various DevSpaces components such as the User Dashboard, Devfile Registry, DevSpaces Server, Plugin Registry, and User Workspaces.
@@ -85,6 +85,7 @@ image::dev_spaces_components.png[]
 
 == What is a Workspace?
 
+* The previous section discussed two concepts that we need to understand before we dive deeper into OpenShift Dev Spaces, workspaces and devfiles. 
 * A workspace is essentially a containerized instance of a development environment dedicated to a single user. This powerful feature allows developers like you to access, write, build, run, or debug code—all within what we call the “inner loop” of development.
 
 * Workspaces are designed to maximize developer productivity by including all the necessary tools within easy reach. Here’s what a typical workspace might include:
@@ -108,12 +109,41 @@ image::dev_spaces_components.png[]
 
 * At the heart of this paradigm is the **Devfile**, a powerful YAML configuration file used by **OpenShift Dev Spaces**. Devfiles act as comprehensive blueprints for setting up development environments. They not only define the runtime environment but also include the necessary tools and commands needed for a project.
 
-==== Features and Benefits of Devfiles
+=== Features and Benefits of Devfiles
 
 	•	Automation-Ready: Devfiles are designed to automate the setup of development environments, reducing manual configuration errors and speeding up the onboarding process for new developers.
 	•	Version Controlled: Like any other piece of code, Devfiles can be versioned using standard source control tools. This allows you to track changes, roll back to previous configurations, and ensure that every team member is working with the same environment settings.
 	•	Consistent & Portable: Devfiles provide a consistent development environment across different machines or platforms. This portability ensures that developers can work seamlessly, irrespective of whether they are coding locally or in a cloud environment.
 
-==== Anatomy of a Devfile
+=== Anatomy of a Devfile
 
+==== Projects (Optional)
 
+*  The projects section is used to specify source code repositories that are essential for the development environment. 
+* It includes details like the repository URL, and the specific branch, tag, or commit to be used. 
+* This setup ensures that the development workspace is automatically pre-populated with the correct version of the code upon initialization.
+
+==== Components: 
+
+* Components are the building blocks of the development environment. The can be
+. **Container**: Specifies the container image containing the runtime environment, development tools, and dependencies.
+. **Kubernetes/OpenShift Resources**: Incorporates Kubernetes or OpenShift-specific resources such as Routes and BuildConfigs into the workspace.
+. **Volume**: Provides persistent storage necessary for certain data within the development environment.
+. **Plugin**: Extends the capabilities of the development environment by adding IDE features or integrating additional tools and services.
+
+==== Commands (Optional): 
+
+* The **Commands** section outlines specific actions that can be executed within the development environment, such as build, run, and test commands. 
+* These commands are defined to automate tasks and facilitate a consistent development workflow across different environments. 
+* Each command can specify a working directory, an associated container, and the actual command line to execute.
+
+==== Events (Optional): 
+
+* The **Events** section in a **devfile** handles the lifecycle events of the workspace, such as pre-start, post-start, pre-stop, and post-stop events.
+* These events trigger specific commands at different stages of the workspace lifecycle, enabling the setup or teardown of services and tools necessary for the development process. This mechanism ensures that certain tasks are automatically handled at the appropriate times, enhancing both the efficiency and reliability of the development environment.
+
+image::devfile_anatomy.png[]
+
+---
+
+== Section Conclusion
