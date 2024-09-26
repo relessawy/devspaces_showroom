@@ -20,7 +20,7 @@ image::developer_onboarding.png[]
 
 * To access the OpenShift Dev Spaces Dashboard, click on the route of the **che_gateway** pod
 
-image::che_gateway_pod.png
+image::che_gateway_pod.png[]
 
 ---
 
@@ -40,7 +40,7 @@ image::authorize_access.png[]
 
 * You will now be greeted by the **OpenShift Dev Spaces dashboard**, your central hub for managing workspaces and projects.
 
-image:: dev_spaces_dashboard.png
+image::dev_spaces_dashboard.png[]
 
 * Let’s now create your first workspace for the GuestBook project.
 * Paste the following link to the GitHub repository into the field **Git Repo URL** within the dashboard to import the project.
@@ -74,3 +74,126 @@ image::project_list.png[]
 
 
 ---
+
+* Now, let’s take a closer look at the pod hosting your workspace within the **user1-devspaces** project. 
+
+image::workspace_pod.png[]
+
+* To gain deeper insights into the pod’s details, switch to the Administrator perspective in your OpenShift console.
+* In the Administrator view, go to Workloads and select Pods. 
+* You’ll notice that the pod has two running containers.
+
+image::pods_view.png[]
+
+* Click on the pod associated with your workspace to drill a bit deeper. The two running containers:
+• **nodejs**: This container provides the Node.js runtime, which is essential for running your GuestBook application.
+• **che-gateway**: This container is responsible for managing the gateway operations that route traffic and commands within your workspace.
+
+image::workspace_containers.png[]
+
+---
+
+== Guestbook devfile
+
+* Let’s switch back to your VSCode tab in the browser and take a closer look at the Devfile that was used for our GuestBook project.
+* This is the DevFile that we used for the guestbook project.
+
+image::guestbook_devfile.png[]
+
+=== 1 Components
+* We start by listing our components, so here we defined the node.js container.
+
+=== 2 Universal Developer Image (UDI)
+* We are are using the Universal Developer Image (UDI) to create this container.
+* UDI is a multipurpose image that includes all the necessary runtimes and tools developers need to code efficiently.
+
+=== 3 Volume
+
+* We then define a volume called NPM to store our dependencies.
+
+=== 4 Commands
+
+* Lastly, we define the commands that can be executed within the workspace. In this case, there’s a command to build and run the GuestBook project.
+
+---
+
+== Test the run command
+
+* Let’s go ahead and run the command defined in the Devfile. 
+* Click on the *Hamburger* menu in the upper left corner of your VS Code interface.
+* Navigate to *Terminal* -> *Run Task*.
+
+image::run_task.png[]
+
+* Select devfile.
+
+image::select_devfile.png[]
+
+* Choose the *Run the application* command.
+
+image::run_the_application_command.png[]
+
+*  This command essentially executes an npm install to fetch the required dependencies, followed by running the application using Node.js.
+* Oh No! We've run into an issue. 
+* The problem here is that the GuestBook application requires MongoDB to run properly.
+
+image::missing_mongodb.png[]
+
+* To resolve this, we need to inject an additional MongoDB component into our *devfile*, similar to the following yaml snippet:
+
+```yaml
+- name: mongo
+    container:
+      image: registry.redhat.io/rhscl/mongodb-36-rhel7:1-50
+      env:
+        - name: MONGODB_USER
+          value: user
+        - name: MONGODB_PASSWORD
+          value: password
+        - name: MONGODB_DATABASE
+          value: guestbook
+        - name: MONGODB_ADMIN_PASSWORD
+          value: password
+      endpoints:
+        - name: mongodb
+          exposure: internal
+          targetPort: 27017
+      memoryLimit: 512Mi
+      mountSources: false
+      volumeMounts:
+        - name: mongo-storage
+          path: /var/lib/mongodb/data
+  - name: mongo-storage
+    volume:
+      size: 1G
+```
+
+* To simply this step, we've already included the new components in the devfile hosted in this branch of the git repository:
+** https://github.com/relessawy/devspaces_guestbook/tree/Module2
+* Go ahead an delete your current workspace, by clicking on the *Kebab* icon (three vertical dots) next to it and select *Delete Workspace*
+
+image::delete_workspace.png[]
+
+* Return to the *Create Workspace* page and provide the new URL in the designated field.
+* Click the button *Create & Open* to create the workspace with MongoDB included.
+
+image::workspace_with_mongodb.png[]
+
+* The OpenShift Dev Spaces server will process the updated *devfile*.
+* As the workspace restarts, switch back to OpenShift to inspect the pods. 
+* You’ll now see that the pod hosting your workspace is spinning up three containers instead of two.
+* Upon inspecting the pod, you’ll find that a *mongo* container is now part of your deployment.
+
+image::workspace_pod_with_3_containers.png[]
+
+* Let's do another build and run for our application.
+* Once again, navigate to the *Hamburger* menu in the upper left corner -> *Terminal* -> *Run Task* -> *devfile* -> *Run the application*.
+* As we might expect, tha application connects successfully to the mongo database, and we get a popup asking if we want to Open our Guest Book application in a new tab.
+* Click the *Open in New Tab* button.
+* Confirm the action to allow VSCode to open the external site by clicking *Open*.
+
+image::open_web_app.png[]
+
+* You should now see the *GuestBook* application running in a separate tab.
+
+

@@ -7,7 +7,10 @@
 
 == Installing OpenShift Dev Spaces
 
-* Begin by logging into your OpenShift console. 
+* Begin by logging into your **OpenShift console** as a cluster admin.
+* Your moderator will provide the Console URL, the credentials are as follows:
+** **user**: opentlc-mgr
+** **password**: r3dh4t1!
 * Once logged in, navigate to the **Operator Hub**. This is where you can find various operators that can be deployed on your OpenShift cluster.
 * In the search bar within the **Operator Hub**, type “Dev Spaces”. This will filter the list of available operators.
 * Look for the “Red Hat OpenShift Dev Spaces” operator in the search results. This is the official Red Hat operator for Dev Spaces.
@@ -23,7 +26,7 @@ image::dev_spaces_operator.png[]
 
 ---
 
-* Follow the on-screen instructions to configure the installation settings. 
+* In the **Install Operator** screen, follow the on-screen instructions to configure the installation settings. 
 * Keep the default settings and click the **Install** button.
 
 image::install_dev_spaces_operator.png[]
@@ -32,14 +35,17 @@ image::install_dev_spaces_operator.png[]
 
 * A few moments later the **Dev Spaces Operator** will be ready for use.
 * Click on the **View installed Operators in Namespace openshift-operators** link to switch to the Installed Operators view.
-* Note that two new Operators have been installed: Red Hat OpenShift Dev Spaces Operator and DevWorkspace Operator.
-* In the Provided APIs Column of the Red Hat OpenShift Dev Spaces Operator, click on “Red Hat OpenShift Dev Spaces Instance Specification” link.
+
+image::view_installed_operators.png[]
+
+* Note that two new Operators have been installed: **Red Hat OpenShift Dev Spaces Operator** and **DevWorkspace Operator**.
+* In the **Provided APIs** Column of the Red Hat OpenShift Dev Spaces Operator, click on “Red Hat OpenShift Dev Spaces Instance Specification” link.
 
 image::installed_operators.png[]
 
 ---
 
-* Click the **Create CheCluster** button.
+* In the Red Hat OpenShift Dev Spaces page, click the **Create CheCluster** button.
 
 image::create_checluster.png[]
 
@@ -89,8 +95,8 @@ image::dev_spaces_components.png[]
 
 == What is a Workspace?
 
-* The previous section discussed two concepts that we need to understand before we dive deeper into OpenShift Dev Spaces, workspaces and devfiles. 
-* A workspace is essentially a containerized instance of a development environment dedicated to a single user. This powerful feature allows developers like you to access, write, build, run, or debug code—all within what we call the “inner loop” of development.
+* The previous section discussed two concepts that we need to understand before we dive deeper into OpenShift Dev Spaces, workspaces and devfiles. LWt's start by explaining what a workspace is in this section.
+* A **workspace** is essentially a containerized instance of a development environment dedicated to a single user. This powerful feature allows developers like you to access, write, build, run, or debug code—all within what we call the “inner loop” of development.
 
 * Workspaces are designed to maximize developer productivity by including all the necessary tools within easy reach. Here’s what a typical workspace might include:
 
@@ -122,7 +128,7 @@ image::dev_spaces_components.png[]
 
 ==== Projects (Optional)
 
-*  The projects section is used to specify source code repositories that are essential for the development environment. 
+* The projects section is used to specify source code repositories that are essential for the development environment. 
 * It includes details like the repository URL, and the specific branch, tag, or commit to be used. 
 * This setup ensures that the development workspace is automatically pre-populated with the correct version of the code upon initialization.
 
