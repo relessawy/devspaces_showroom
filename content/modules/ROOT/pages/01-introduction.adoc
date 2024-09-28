@@ -67,9 +67,18 @@ NOTE: In *OpenShift Dev Spaces*, the term *Che cluster* refers to an installatio
 
 ---
 
-* Keep the default values and click the **Create** button.
+* Switch to the *Yaml View*.
+* Under the spec section, locate the metrics attribute. Ensure you maintain the same indentation as the metrics attribute, then add the following code beneath it:
 
-image::checluster_form.png[]
+```yaml
+pluginRegistry:
+      openVSXURL: 'https://open-vsx.org'
+```
+* After adding the code, click the *Create* button to create the *CheCluster*.
+
+image::add_plugin_registery[]
+
+NOTE: This code configures the *Dev Spaces workspace* to pull plugins from the link:https://open-vsx.org/[*Open VSX Registry*,window=_blank], which allows users to extend their development environment with a wide range of VSCode-compatible plugins.
 
 ---
 

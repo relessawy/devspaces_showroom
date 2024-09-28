@@ -1,30 +1,34 @@
 
 = Developer Onboarding with Dev Spaces
 
-* Imagine you are a new developer joining a project called GuestBook. Your onboarding is going to be quick and seamless, thanks to OpenShift Dev Spaces. Here’s how your journey begins:
-* Your manager has provided you with a link to access **OpenShift Dev Spaces** through your browser. 
-* The moment you click the link, the **Dev Spaces Gateway** authenticates your credentials and directs your request to the Dev Spaces Server. 
-* This server then processes your request and sends back the necessary information to display the **DevSpaces Dashboard** in your browser.
-* Once on the dashboard, you’ll see the GuestBook project listed. Clicking on it will initiate the next step: the Dev Spaces Server reads the devfile for the GuestBook project. 
-* This devfile contains all the essential information about runtimes, dependencies, and development tools that are required to start working on the project.
-* From there, the **Dev Spaces Server** creates a dedicated Project in OpenShift just for you, and spins up a workspace configured exactly as specified in the devfile.
-* This entire process ensures that you have the perfect development environment tailored for your project, without needing to set anything up manually.
+* Imagine you are a new developer joining a project called *GuestBook*. 
+* Thanks to *OpenShift Dev Spaces*, your onboarding process will be quick, seamless, and fully automated. 
+* Here’s how your journey 
+. Your manager provides you with a link to access *OpenShift Dev Spaces* directly from your browser.
+. The moment you click the link, the **Dev Spaces Gateway** authenticates your credentials and directs your request to the *Dev Spaces Server*. 
+. The *Dev Spaces Server* processes the request and sends the necessary information back to your browser, displaying the *Dev Spaces Dashboard*.
+. On the *Dev Spaces Dashboard*, you’ll find the *GuestBook*project. Simply clicking on it initiates the next step, the *Dev Spaces Server* reads the *devfile* for the project.
+. The *devfile* contains all the essential information you need to start developing—runtimes, dependencies, and development tools. Everything is pre-configured for you.
+. Once the *Dev Spaces Server* reads the *devfile*, it creates a dedicated Project in OpenShift just for you, and spins up a *workspace* configured exactly as specified in the *devfile*.
+. This entire process ensures that you have a fully tailored development environment without needing to set up anything manually. You’re ready to code from the moment you access the project.
 
 image::developer_onboarding.png[]
 
-* Now, let’s try this out hands-on in this module and see how OpenShift Dev Spaces simplifies your onboarding and development process!
+* Now it’s time to try this out hands-on. In this module, you’ll experience firsthand how *OpenShift Dev Spaces* simplifies your onboarding and development process.
 
 ---
 
-== Developer Onboarding 
+== Lab 2.1 Developer Onboarding 
 
-* To access the OpenShift Dev Spaces Dashboard, click on the route of the **che_gateway** pod
+=== Lab 2.1.1: Login to OpenShift Dev Spaces
+
+* To access the *OpenShift Dev Spaces Dashboard*, click on the route of the **che_gateway** pod
 
 image::che_gateway_pod.png[]
 
 ---
 
-* You will be asked to Log in using your OpenShift credentials, use the following:
+* You will be prompted to log in using your *OpenShift* credentials. Please use the following:
 ** username: user1
 ** password: openshift
 
@@ -32,17 +36,21 @@ image::login_with_openshift.png[]
 
 ---
 
-* On the “Authorize Access” screen, click the **Allow Select Permissions** button to grant the necessary permissions.
+* On the *Authorize Access* screen, click the *Allow Select Permissions* button to grant the necessary permissions.
 
 image::authorize_access.png[]
 
 ---
 
-* You will now be greeted by the **OpenShift Dev Spaces dashboard**, your central hub for managing workspaces and projects.
+* Once authenticated, you will be greeted by the **OpenShift Dev Spaces dashboard**, your central hub for managing workspaces and projects.
 
 image::dev_spaces_dashboard.png[]
 
-* Let’s now create your first workspace for the GuestBook project.
+---
+
+=== Lab 2.1.2: Create your first workspace
+
+* Let’s create a workspace for the *GuestBook* project.
 * Paste the following link to the GitHub repository into the field **Git Repo URL** within the dashboard to import the project.
 ** https://github.com/relessawy/devspaces_guestbook/
 * Click the **Create & Open** button
@@ -51,93 +59,102 @@ image::import_from_git.png[]
 
 ---
 
-* It will take the Dev Spaces server a few minutes to process the devfile and spin up your workspace
+* It will take the *Dev Spaces server* a few minutes to process the *devfile* and spin up your *workspace*.
 
 image::starting_workspace.png[]
 
 ---
 
-* A pop-up will appear asking, “Do you trust the authors of the files in this folder?” This is a standard security measure to ensure that the files you are about to use are safe and come from a reliable source.
+* A pop-up will appear, asking, “Do you trust the authors of the files in this folder?” This is a standard security measure to ensure that the files you are about to use are safe and come from a reliable source.
 * Click the **Yes, I trust the authors** button.
 
 image::trust_authors.png[]
 
 ---
 
-* Now that we’ve set up the workspace, let’s quickly switch back to the OpenShift console to see what happened behind the scenes during this process.
-* In the top left corner of your OpenShift console, click the **Project dropdown list**. This list shows all the available projects currently deployed on your OpenShift cluster.
-* You will notice a new project called **user1-devspaces** has been automatically created for you. This project was provisioned by OpenShift Dev Spaces to serve as your personal development space, based on the devfile configuration.
+=== Lab 2.1.3: Explore workspace pods
+
+* Now that your *workspace* is set up, let’s switch back to the *OpenShift* console to see what happened behind the scenes during this process.
+* In the top left corner of the OpenShift console, click the *Project dropdown list* to view all projects.
+* You will notice a new project called *user1-devspaces*.has been automatically created for you. 
+* This project was automatically created by *OpenShift Dev Spaces* as your personal development environment based on the *devfile* configuration.
 
 image::project_list.png[]
 
 * Select **user1-devspaces** to switch to this project.
 
-
 ---
 
-* Now, let’s take a closer look at the pod hosting your workspace within the **user1-devspaces** project. 
+* Let’s take a closer look at the pod hosting your *workspace* within the *user1-devspaces* project. 
 
 image::workspace_pod.png[]
 
-* To gain deeper insights into the pod’s details, switch to the Administrator perspective in your OpenShift console.
-* In the Administrator view, go to Workloads and select Pods. 
-* You’ll notice that the pod has two running containers.
+* To gain deeper insights into the pod’s details, switch to the *Administrator* perspective in your OpenShift console.
+* In the *Administrator* view, go to *Workloads* and select Pods. 
+* You’ll see that the pod associated with your *workspace* has two running containers.
 
 image::pods_view.png[]
 
-* Click on the pod associated with your workspace to drill a bit deeper. The two running containers:
-• **nodejs**: This container provides the Node.js runtime, which is essential for running your GuestBook application.
+* Click on the pod associated with your workspace to drill a bit deeper. The two running containers are:
+• *nodejs*: This container provides the Node.js runtime, which is essential for running your *GuestBook* application.
 • **che-gateway**: This container is responsible for managing the gateway operations that route traffic and commands within your workspace.
 
 image::workspace_containers.png[]
 
 ---
 
-== Guestbook devfile
+=== Lab 2.1.4: Examine the Guestbook devfile
 
-* Let’s switch back to your VSCode tab in the browser and take a closer look at the Devfile that was used for our GuestBook project.
-* This is the DevFile that we used for the guestbook project.
+* Let’s return to your *VSCode* tab in the browser to take a closer look at the *devfile* used for our *GuestBook* project. 
+* This devfile serves as the blueprint for setting up the development environment.
 
 image::guestbook_devfile.png[]
 
-=== 1 Components
-* We start by listing our components, so here we defined the node.js container.
+==== 1 Components
+* We start by listing our components, In this case, the *devfile* defines a Node.js container that provides the runtime for the *GuestBook* application.
 
-=== 2 Universal Developer Image (UDI)
-* We are are using the Universal Developer Image (UDI) to create this container.
-* UDI is a multipurpose image that includes all the necessary runtimes and tools developers need to code efficiently.
 
-=== 3 Volume
+==== 2 Universal Developer Image (UDI)
+* We are are using the *Universal Developer Image (UDI)* to create this container.
+* The *UDI* is a versatile image that includes all the essential runtimes and tools developers need to code efficiently, making it an ideal choice for development environments.
 
-* We then define a volume called NPM to store our dependencies.
+==== 3 Volume
 
-=== 4 Commands
+* Next, we define a volume named NPM to store our dependencies.
+* This volume ensures that our dependencies are preserved across container restarts and development sessions.
 
-* Lastly, we define the commands that can be executed within the workspace. In this case, there’s a command to build and run the GuestBook project.
+==== 4 Commands
+
+* Lastly, we define the commands that can be executed within the *workspace*. 
+* In the case of the *GuestBook* project, we have commands to build and run the application, allowing us to easily execute project-related tasks from within the workspace.
 
 ---
 
-== Test the run command
+=== Lab 2.1.5: Test the run command
 
-* Let’s go ahead and run the command defined in the Devfile. 
-* Click on the *Hamburger* menu in the upper left corner of your VS Code interface.
-* Navigate to *Terminal* -> *Run Task*.
+* Let’s go ahead and execute the *Run the application* defined in the *devfile*.
+* You’ll notice that the *Task Manager* extension is already pre-installed in your workspace.
 
-image::run_task.png[]
+image:task_manager_ext.png[]
 
-* Select devfile.
+* Any extensions defined in the ’extensions.json’ file located under the ’.vscode’ folder will automatically be pre-installed in your *workspace*. 
+* This ensures a standardized development environment for all developers working on the *GuestBook* project.
 
-image::select_devfile.png[]
+image:extensions_file.png[]
 
-* Choose the *Run the application* command.
+* The *Task Manager* extension simplifies running the commands defined in our *devfile*.
+* To run the application, select and run the command *Run the application command* under the *devfile* section in *Task Manager*.
 
-image::run_the_application_command.png[]
+image::run_command.png[]
 
-*  This command essentially executes an npm install to fetch the required dependencies, followed by running the application using Node.js.
-* Oh No! We've run into an issue. 
-* The problem here is that the GuestBook application requires MongoDB to run properly.
+* This command will execute an ’npm install’ to fetch the necessary dependencies, followed by running the application using ’Node.js’.
+* Uh oh, we’ve run into a problem! The application is unable to run because the *GuestBook *project requires *MongoDB* to operate properly.
 
 image::missing_mongodb.png[]
+
+---
+
+== Lab 2.2 Adding components to the devfile
 
 * To resolve this, we need to inject an additional MongoDB component into our *devfile*, similar to the following yaml snippet:
 
@@ -168,16 +185,20 @@ image::missing_mongodb.png[]
       size: 1G
 ```
 
-* To simply this step, we've already included the new components in the devfile hosted in this branch of the git repository:
-** https://github.com/relessawy/devspaces_guestbook/tree/Module2
+* To simply this step, we've already included the new components in the *devfile* hosted in this branch of the git repository:
+** https://github.com/relessawy/devspaces_guestbook/tree/Lab2.2
 * Go ahead an delete your current workspace, by clicking on the *Kebab* icon (three vertical dots) next to it and select *Delete Workspace*
 
 image::delete_workspace.png[]
+
+---
 
 * Return to the *Create Workspace* page and provide the new URL in the designated field.
 * Click the button *Create & Open* to create the workspace with MongoDB included.
 
 image::workspace_with_mongodb.png[]
+
+---
 
 * The OpenShift Dev Spaces server will process the updated *devfile*.
 * As the workspace restarts, switch back to OpenShift to inspect the pods. 
@@ -186,8 +207,11 @@ image::workspace_with_mongodb.png[]
 
 image::workspace_pod_with_3_containers.png[]
 
+---
+
+* Feel free to explore the updated *devfile* in this *workspace*.
 * Let's do another build and run for our application.
-* Once again, navigate to the *Hamburger* menu in the upper left corner -> *Terminal* -> *Run Task* -> *devfile* -> *Run the application*.
+* Once again, select and run the command *Run the application command* under the *devfile* section in *Task Manager*.
 * As we might expect, tha application connects successfully to the mongo database, and we get a popup asking if we want to Open our Guest Book application in a new tab.
 * Click the *Open in New Tab* button.
 * Confirm the action to allow VSCode to open the external site by clicking *Open*.
@@ -195,6 +219,32 @@ image::workspace_pod_with_3_containers.png[]
 image::open_web_app.png[]
 
 * You should now see the *GuestBook* application running in a separate tab.
+
+image:my_guest_book.png[]
+
+---
+
+== Lab 2.3 Development and Debugging with OpenShift Dev Spaces
+
+* Add the *MongoDB fo VSCode* extension
+* Create a new connection
+* mongodb://user:password@localhost:27017/guestbook
+* No we are connected to the guestbook database
+We can inpect all the messages 
+So as part of the inner loop capablties you can debug and test your application from within OpenShift Dev Spaces 
+Open the main application file app.js and a dd a break point at line 39, copy the variable saveMessages in your clipboard.
+And then we start debugging, and attach to the Node.js process
+The select and run *Run Script: Debig*
+Click hte Yes button to accept openinng the debugging port 9229
+A pop up will now ask if it should open an tab for your nod.js papplication, once again click the OPen in New Tab buttongrocess
+Finally click the OPen buttin to accept opening the extetnal website.
+As you can expect the apllication stops at the breakpoint 
+We can contioue the execution be clikcing the resume button
+We can add watch to the variable "savedMessages"
+And now lets add one more record in the our GuestBook for example 
+We can select step over from the upper menu
+And the momement we step over we can see all the messages that were submitted through the variable saved messages.
+Once we are done we can stop the debugger and terminate the debugging session
 
 
 oc login -u opentlc-mgr -p r3dh4t1!
