@@ -1,8 +1,8 @@
-# OpenShift AI Unleashed: Transforming Claims Processing for Maximum Efficiency!
+# Supercharge Developer experience with OpenShift Dev Spaces
 
 ## Introduction
 
-This repository contains the code, instructions, resources and materials associated with the Lab called **OpenShift AI Unleashed: Transforming Claims Processing for Maximum Efficiency!**.
+This repository contains the code, instructions, resources and materials associated with the Workshop called **Supercharge Developer experience with OpenShift Dev Spaces**.
 
 To consult the static version of the instructions, please use [this URL](https://rh-aiservices-bu.github.io/parasol-insurance/)
 
