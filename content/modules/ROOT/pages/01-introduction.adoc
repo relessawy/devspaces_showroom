@@ -76,7 +76,7 @@ pluginRegistry:
 ```
 * After adding the code, click the *Create* button to create the *CheCluster*.
 
-image::add_plugin_registery[]
+image:add_plugin_registry.png[]
 
 NOTE: This code configures the *Dev Spaces workspace* to pull plugins from the link:https://open-vsx.org/[*Open VSX Registry*,window=_blank], which allows users to extend their development environment with a wide range of VSCode-compatible plugins.
 
