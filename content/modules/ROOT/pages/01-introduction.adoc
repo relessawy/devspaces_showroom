@@ -1,53 +1,69 @@
 
 = Supercharge Developer Experience with OpenShift Dev Spaces
 
-* OpenShift Dev Spaces is an integrated development environment hosted within the Red Hat OpenShift platform, designed to streamline and enhance the developer experience in a cloud-native landscape. 
-* This innovative tool allows developers to quickly spin up containerized development environments, providing instant access to a wide range of resources and tools directly in the cloud. 
-* In this module, we will guide you through the installation process, explain how to navigate the OpenShift Dev Spaces interface, and delve into its core components. 
+== Introduction
 
-== Installing OpenShift Dev Spaces
+* *OpenShift Dev Spaces* is a cloud-based integrated development environment (IDE) hosted on the Red Hat OpenShift platform. 
+* It is designed to streamline and enhance the developer experience in a cloud-native landscape.
+* This powerful tool allows developers to rapidly spin up containerized development environments, offering immediate access to essential resources and tools, all accessible directly from the cloud.
+* With *OpenShift Dev Spaces*, developers can create, build, and test applications entirely within the Red Hat OpenShift ecosystem, without needing to configure local development environments.
+*  All that’s required is a web browser, making the process simple and accessible.
+* In this module, we will walk you through the installation process, demonstrate how to navigate the OpenShift Dev Spaces interface, and explore its key components to help you maximize your development efficiency. 
+
+== Lab 1: Installing OpenShift Dev Spaces
+
+=== Accessing the OpenShift Console
 
 * Begin by logging into your **OpenShift console** as a cluster admin.
-* Your moderator will provide the Console URL, the credentials are as follows:
+* Your moderator will provide the Console URL, and the credentials are as follows:
 ** **user**: opentlc-mgr
 ** **password**: r3dh4t1!
-* Once logged in, navigate to the **Operator Hub**. This is where you can find various operators that can be deployed on your OpenShift cluster.
-* In the search bar within the **Operator Hub**, type “Dev Spaces”. This will filter the list of available operators.
-* Look for the “Red Hat OpenShift Dev Spaces” operator in the search results. This is the official Red Hat operator for Dev Spaces.
+
+---
+
+=== Installing the OpenShift Dev Spaces Operator
+
+* Once logged in, navigate to the **Operator Hub**, the central location where you can find and deploy various operators to your OpenShift cluster.
+* In the search bar within the **Operator Hub**, type `Dev Spaces`. This will filter the list of available operators.
+* Look for the *Red Hat OpenShift Dev Spaces* operator in the search results. This is the official Red Hat operator for Dev Spaces.
 
 image::search_dev_spaces_operator.png[]
 
 ---
 
-* Click on the operator to view more details. You’ll find information about what the operator does, along with its features and configuration options.
-* Click on the **Install** button.
+* Click on the operator to view more detailed information about its capabilities, features, and configuration options.
+* Proceed by clicking on the **Install** button.
 
 image::dev_spaces_operator.png[]
 
 ---
 
-* In the **Install Operator** screen, follow the on-screen instructions to configure the installation settings. 
-* Keep the default settings and click the **Install** button.
+* Follow the on-screen instructions on the *Install Operator* screen to configure the installation settings.
+* Keep the default settings and click the *Install* button to initiate the installation process.
 
 image::install_dev_spaces_operator.png[]
 
 ---
 
-* A few moments later the **Dev Spaces Operator** will be ready for use.
-* Click on the **View installed Operators in Namespace openshift-operators** link to switch to the Installed Operators view.
+* After a few moments, the *Dev Spaces Operator* will be ready for use.
+* Click on the *View installed Operators in Namespace openshift-operators* link to switch to the *Installed Operators* view.
 
 image::view_installed_operators.png[]
 
 * Note that two new Operators have been installed: **Red Hat OpenShift Dev Spaces Operator** and **DevWorkspace Operator**.
-* In the **Provided APIs** Column of the Red Hat OpenShift Dev Spaces Operator, click on “Red Hat OpenShift Dev Spaces Instance Specification” link.
+* Click on the `Red Hat OpenShift Dev Spaces Instance Specification` link found in the *Provided APIs* column of the Red Hat *OpenShift Dev Spaces* Operator.
 
 image::installed_operators.png[]
 
 ---
 
+=== Creating a CheCluster
+
 * In the Red Hat OpenShift Dev Spaces page, click the **Create CheCluster** button.
 
 image::create_checluster.png[]
+
+NOTE: In *OpenShift Dev Spaces*, the term *Che cluster* refers to an installation of *Eclipse Che*, which is the upstream open-source project of Red Hat *OpenShift Dev Spaces*.
 
 ---
 
@@ -57,88 +73,95 @@ image::checluster_form.png[]
 
 ---
 
-* In the Developer Perspective, switch to the Topology view to visually monitor the status of the pods.
-* Keep an eye on the pods until all are fully operational and show a status of ‘Running’.
+* Switch to the *Developer Perspective* within the OpenShift console. 
+* Once there, switch to the *Topology view* to visually monitor the status of the pods associated with *OpenShift Dev Spaces*.
+* Keep an eye on the pods until all are fully operational and show a status of ‘Running’ (dark blue circle around pod).
 
 image::dev_spaces_topology_view.png[]
 
+---
+
+=== OpenShift Dev Spaces Core Components 
+
 * Now that the initial setup is complete, let's familiarize ourselves with the core five components of **OpenShift Dev Spaces**.
 
-=== 1. User Dashboard
+==== 1. User Dashboard
 
-* Serves as the landing page for OpenShift DevSpaces.
-* Users access and manage their workspaces through this React application. It’s designed to provide a straightforward and effective user experience for interacting with various workspace functionalities.
+* The *User Dashboard* is the central landing page for OpenShift Dev Spaces, where users can access and manage their workspaces. 
+* It is designed to provide a simple yet powerful interface for interacting with various workspace functionalities.
 
-=== 2. Devfiles Registry
+==== 2. Devfiles Registry
 
-* Contains templates for devfiles, which are YAML files that describe and configure a development environment specifically for an application. 
-* Devfiles make it easy to onboard a project, as they define the source code repositories, build, and runtime environments. We will dive deeper into workspaces and devfiles in the coming sections.
+* The *Devfiles Registry* contains templates for *devfiles*, which are YAML files that describe and configure development environments. 
+* *Devfiles* simplify project onboarding by defining everything from source code repositories to build and runtime environments. 
+* We will dive deeper into *workspaces* and *devfiles* in the following sections.
 
-=== 3. Plugin Registry 
+==== 3. Plugin Registry 
 
-* Stores plugins that can be used to extend the development environment. 
-* These plugins can provide additional language support, developer tools, or connections to external services.
+* The *Plugin Registry* stores a variety of plugins that can extend the development environment. 
+* These plugins may provide additional language support, developer tools, or integrations with external services.
 
-=== 4. Dev Spaces Server
+==== 4. Dev Spaces Server
 
- * Acts as the central hub and orchestrates the creation, management, and deletion of development workspaces. It’s responsible for managing authentication, authorization, user profiles, workspace resources, and integration with other services.
+ * The *Dev Spaces Server* is the central orchestrator of the platform. 
+ * It manages the creation, management, and deletion of workspaces, handling key tasks like authentication, authorization, user profiles, and integration with other services.
 
-=== 5. The Gateway
+==== 5. The Gateway
 
- * Based on Traefik, serves as the secure entry point for routing traffic efficiently between the user’s workspace and external networks.
- * It plays a pivotal role in directing requests to various DevSpaces components such as the User Dashboard, Devfile Registry, DevSpaces Server, Plugin Registry, and User Workspaces.
-* The Gateway is critical for integrating external services and tools, providing controlled access while maintaining network security and isolation essential for collaborative development activities.
+* The *Gateway*, based on *Traefik*, acts as the secure entry point for routing traffic efficiently between the user’s workspace and external networks.
+* It directs requests to various components of *OpenShift Dev Spaces*, such as the *User Dashboard*, *Devfile Registry*, *Dev Spaces Server*, *Plugin Registry*, and individual user workspaces.
+* The *Gateway* is critical for integrating external services and tools, providing controlled access while maintaining network security and isolation essential for collaborative development activities.
 
 image::dev_spaces_components.png[]
 
+* Now that we’ve covered the core components of *OpenShift Dev Spaces*, it’s time to dive deeper into two important concepts: *workspaces** and *devfiles*. 
+* Let’s start by exploring what a *workspace* is and why it is critical to your development process in the next section.
 ---
 
 == What is a Workspace?
 
-* The previous section discussed two concepts that we need to understand before we dive deeper into OpenShift Dev Spaces, workspaces and devfiles. LWt's start by explaining what a workspace is in this section.
-* A **workspace** is essentially a containerized instance of a development environment dedicated to a single user. This powerful feature allows developers like you to access, write, build, run, or debug code—all within what we call the “inner loop” of development.
+* A *workspace* is a containerized instance of a development environment tailored for a single user.
+* It allows you to write, build, run, or debug code, all within the *inner loop* of development lifecycle. 
+* *Workspaces* are designed to maximize developer productivity by providing all the necessary tools in one place. 
+* Here’s what a typical workspace might include:
 
-* Workspaces are designed to maximize developer productivity by including all the necessary tools within easy reach. Here’s what a typical workspace might include:
+	• *Language Runtime/Development Kits*: Whether you’re coding in Node.js, Java (using JDKs), or Python, the right runtime environments and development kits are ready for you.
+	• *Build Tools*: Tools like Maven or Gradle are available to handle project builds efficiently, ensuring that you can compile and prepare your applications with ease.
+	• *Command Line Interfaces (CLIs)*: Direct access to OpenShift CLIs and other essential tools right from your workspace, enabling seamless interaction with your applications and services.
+	• *Binaries*: Essential binaries to run various processes such as application servers or message brokers are part of your workspace, ensuring you have everything you need to get your applications up and running.
 
-	•	**Language Runtime/Development Kits**: Whether you’re coding in Node.js, Java (using JDKs), or Python, the right runtime environments and development kits are ready for you.
-	•	**Build Tools**: Tools like Maven or Gradle are available to handle project builds efficiently, ensuring that you can compile and prepare your applications with ease.
-	•	**Command Line Interfaces (CLIs)**: Direct access to OpenShift CLIs and other essential tools right from your workspace, enabling seamless interaction with your applications and services.
-	•	**Binaries**: Essential binaries to run various processes such as application servers or message brokers are part of your workspace, ensuring you have everything you need to get your applications up and running.
-
-* What makes **OpenShift Dev Spaces** particularly flexible and powerful is its extensibility through plug-ins. These plug-ins can be sourced from a plug-in registry, and include:
-
-	•	Dev Spaces Plug-ins: Native plug-ins designed specifically for enhancing the functionality of your Dev Spaces environment.
-	•	VSCode Plug-ins: Yes, you read that correctly! It’s possible to integrate well-known VSCode plug-ins into your workspace, bringing the power and familiarity of Visual Studio Code into your containerized development environment.
-
----
+* In the next section, we will deep dive into *Devfiles*. 
+* We’ll explore how they enable the *Development Environment as Code* paradigm, making it easier to automate, version control, and manage your development environments.
 
 == Development Environment as Code with Devfiles
 
-* The concept of “Development Environment as Code” represents a significant shift in the way we set up and manage development environments. By treating these configurations as code, developers can leverage automation, apply version control, and ensure consistency across various setups. This approach simplifies the complex process of configuring individual environments and aligns it with modern DevOps practices.
+* The concept of *Development Environment as Code* represents a significant shift in the way we set up and manage development environments. 
+* By treating these configurations as code, developers can leverage automation, apply version control, and ensure consistency across various setups. 
+* This approach simplifies the complex process of configuring individual environments and aligns it with modern DevOps practices.
+* At the heart of this paradigm is the *Devfile*, a powerful YAML configuration file used by **OpenShift Dev Spaces**. 
+* *Devfiles* act as comprehensive blueprints for setting up development environments, defining everything from runtime environments to the necessary tools and commands needed for a project.
 
-* At the heart of this paradigm is the **Devfile**, a powerful YAML configuration file used by **OpenShift Dev Spaces**. Devfiles act as comprehensive blueprints for setting up development environments. They not only define the runtime environment but also include the necessary tools and commands needed for a project.
 
 === Features and Benefits of Devfiles
 
-	•	Automation-Ready: Devfiles are designed to automate the setup of development environments, reducing manual configuration errors and speeding up the onboarding process for new developers.
-	•	Version Controlled: Like any other piece of code, Devfiles can be versioned using standard source control tools. This allows you to track changes, roll back to previous configurations, and ensure that every team member is working with the same environment settings.
-	•	Consistent & Portable: Devfiles provide a consistent development environment across different machines or platforms. This portability ensures that developers can work seamlessly, irrespective of whether they are coding locally or in a cloud environment.
+	• *Automation-Ready*: *Devfiles* are designed to automate the setup of development environments, reducing manual configuration errors and speeding up the onboarding process for new developers.
+	•*Version Controlled*: Like any other piece of code, *Devfiles* can be versioned using standard source control tools. This allows you to track changes, roll back to previous configurations, and ensure that every team member is working with the same environment settings.
+	• *Consistent & Portable*: *Devfiles* provide a consistent development environment across different machines or platforms. This portability ensures that developers can work seamlessly, irrespective of whether they are coding locally or in a cloud environment.
 
 === Anatomy of a Devfile
 
 ==== Projects (Optional)
 
-* The projects section is used to specify source code repositories that are essential for the development environment. 
-* It includes details like the repository URL, and the specific branch, tag, or commit to be used. 
-* This setup ensures that the development workspace is automatically pre-populated with the correct version of the code upon initialization.
+* The *Projects* section is used to specify source code repositories that are essential for the development environment. 
+*  It includes details like the repository URL and the specific branch, tag, or commit to be used, ensuring that the *workspace* is pre-populated with the correct code version upon initialization.
 
 ==== Components: 
 
-* Components are the building blocks of the development environment. The can be
-. **Container**: Specifies the container image containing the runtime environment, development tools, and dependencies.
-. **Kubernetes/OpenShift Resources**: Incorporates Kubernetes or OpenShift-specific resources such as Routes and BuildConfigs into the workspace.
-. **Volume**: Provides persistent storage necessary for certain data within the development environment.
-. **Plugin**: Extends the capabilities of the development environment by adding IDE features or integrating additional tools and services.
+* *Components* are the building blocks of the development environment. The can be of type:
+. *Container*: Defines the container image containing the runtime environment, development tools, and dependencies.
+. *Kubernetes/OpenShift Resources*: Incorporates Kubernetes or OpenShift-specific resources such as Routes and BuildConfigs into the workspace.
+. *Volume*: Provides persistent storage necessary for certain data within the development environment.
+. *Plugin*: Extends the capabilities of the development environment by adding IDE features or integrating additional tools and services.
 
 ==== Commands (Optional): 
 
@@ -148,11 +171,20 @@ image::dev_spaces_components.png[]
 
 ==== Events (Optional): 
 
-* The **Events** section in a **devfile** handles the lifecycle events of the workspace, such as pre-start, post-start, pre-stop, and post-stop events.
-* These events trigger specific commands at different stages of the workspace lifecycle, enabling the setup or teardown of services and tools necessary for the development process. This mechanism ensures that certain tasks are automatically handled at the appropriate times, enhancing both the efficiency and reliability of the development environment.
+* The *Events* section in a *devfile* handles the lifecycle events of the workspace, such as pre-start, post-start, pre-stop, and post-stop events.
+* These events trigger specific commands at different stages of the workspace lifecycle, enabling the setup or teardown of services and tools necessary for the development process.
+* This mechanism ensures that certain tasks are automatically handled at the appropriate times, enhancing both the efficiency and reliability of the development environment.
 
 image::devfile_anatomy.png[]
 
 ---
 
 == Module Conclusion
+
+* In this module, you’ve walked through the steps of installing *OpenShift Dev Spaces* using an operator and successfully created your first *CheCluster*. 
+* Beyond the installation, you’ve also explored the core components that make *OpenShift Dev Spaces* such a powerful tool for cloud-native development.
+* Additionally, we’ve taken a deep dive into the concepts of *workspaces* and *devfiles*.
+
+* With the foundation in place, it’s time to see how *OpenShift Dev Spaces* improves the developer onboarding process.
+* In the next section, you will experience how easy it is to onboard new developers, set up their environments, and get them started with minimal configuration. 
+* Stay tuned as we guide you through this hands-on experience of onboarding developers, showcasing how *OpenShift Dev Spaces* ensures that new team members can jump right into development, reducing setup time and eliminating barriers to productivity.

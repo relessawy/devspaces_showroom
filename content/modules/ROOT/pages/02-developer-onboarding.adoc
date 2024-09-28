@@ -197,3 +197,33 @@ image::open_web_app.png[]
 * You should now see the *GuestBook* application running in a separate tab.
 
 
+oc login -u opentlc-mgr -p r3dh4t1!
+
+oc apply -f imagestream.yaml
+
+oc apply -f build/buildconfig.yaml 
+
+oc start-build guestbook-dev-environment
+
+mongostat -u admin -p password --authenticationDatabase admin
+
+--plugin registery
+
+pluginRegistry:
+      openVSXURL: 'https://open-vsx.org'
+
+--CAmel workspcae
+
+
+curl -Ls https://sh.jbang.dev | bash -s - app setup
+
+- from:
+    uri: "timer:yaml"
+    parameters:
+      period: "1000"
+    steps:
+      - setBody:
+          simple: "Hello Camel from ${routeId}"
+      - log: "${body}"
+
+jbang '-Dcamel.jbang.version=4.2.0' camel@apache/camel run sample-route.camel.yaml --dev --logging-level=info 
