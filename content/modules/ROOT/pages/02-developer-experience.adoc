@@ -1,5 +1,5 @@
 
-= Developer Onboarding with Dev Spaces
+= Developer Experience with Dev Spaces
 
 * Imagine you are a new developer joining a project called *GuestBook*. 
 * Thanks to *OpenShift Dev Spaces*, your onboarding process will be quick, seamless, and fully automated. 
@@ -22,9 +22,11 @@ image::developer_onboarding.png[]
 
 === Lab 2.1.1: Login to OpenShift Dev Spaces
 
-* To access the *OpenShift Dev Spaces Dashboard*, click on the route of the **che_gateway** pod
+* Open the *Red Hat Applications* menu by using the *three-by-three matrix* icon in the upper right corner of the main screen.
+* Click the *OpenShift Dev Spaces* link to open the *Dev Spaces Dashboard*.
 
-image::che_gateway_pod.png[]
+
+image::three_by_three_matrix.png[]
 
 ---
 
@@ -224,28 +226,100 @@ image:my_guest_book.png[]
 
 ---
 
-== Lab 2.3 Development and Debugging with OpenShift Dev Spaces
+== Lab 2.3 Testing and Debugging with OpenShift Dev Spaces
 
-* Add the *MongoDB fo VSCode* extension
-* Create a new connection
-* mongodb://user:password@localhost:27017/guestbook
-* No we are connected to the guestbook database
-We can inpect all the messages 
-So as part of the inner loop capablties you can debug and test your application from within OpenShift Dev Spaces 
-Open the main application file app.js and a dd a break point at line 39, copy the variable saveMessages in your clipboard.
-And then we start debugging, and attach to the Node.js process
-The select and run *Run Script: Debig*
-Click hte Yes button to accept openinng the debugging port 9229
-A pop up will now ask if it should open an tab for your nod.js papplication, once again click the OPen in New Tab buttongrocess
-Finally click the OPen buttin to accept opening the extetnal website.
-As you can expect the apllication stops at the breakpoint 
-We can contioue the execution be clikcing the resume button
-We can add watch to the variable "savedMessages"
-And now lets add one more record in the our GuestBook for example 
-We can select step over from the upper menu
-And the momement we step over we can see all the messages that were submitted through the variable saved messages.
-Once we are done we can stop the debugger and terminate the debugging session
+* Now that we have our *GuestBook* application up and running in *OpenShift Dev Spaces*, it’s time to start testing and debugging the application, just as you would in a local development environment. 
+* In this lab, we will demonstrate how to leverage the inner loop capabilities of *OpenShift Dev Spaces* to debug and inspect your application within the cloud-native workspace.
 
+---
+
+=== Lab 2.3.1 Inspect messages in MongoDB
+
+* While your workspace can come predefined with extensions, you still have the flexibility to add your favorite extensions, ensuring your development environment suits your workflow.
+* Begin by installing the *MongoDB for VS Code* extension to your workspace.
+
+image:install_mongodb_for_vscode_ext.png[]
+
+* Click on the Connect button to create a connection with *Connection String*. 
+* Establish a connection to the GuestBook database using the following connection string:
+
+```yaml
+mongodb://user:password@localhost:27017/guestbook
+```
+image:establish_connection_to_mongodb.png[]
+
+---
+
+* Now that you’re connected to the *GuestBook* database, you can inspect all the messages stored within it.
+* Go ahead and provide some new messages in the GuestBook application, for example: "Hello World! from Eddie"
+
+image:eddie_says_hello_world.png[]
+
+* After submitting your messages in the application, you’ll be able to trace those messages directly in the *GuestBook* database. This allows you to verify that the application is correctly storing and retrieving data as expected.
+
+image:message_trace.png[]
+
+---
+
+=== Lab 2.3.2 Testing and Debugging
+
+* As part of the inner loop capabilities, you can test and debug your application directly within your *workspace* in *OpenShift Dev Spaces*.
+* First, terminate the *Run Application* task to allow us to start the application in *debug mode*.
+
+* image:terminate_task.png[]
+
+* Open the main application file *app.j*s* and add a *breakpoint* at *line 39*. * Copy the variable saveMessages in your clipboard. 
+
+image:add_break_point.png[]
+
+* In the left-hand menu, click on the *Run and Debug* icon.
+* From the dropdown at the top, select *Node.js* as the process to attach to.
+* Choose the *Run Script: Debug* option to initiate the debug process.
+
+image:start_run_debug_process.png[]
+
+*	Finally, click *Start Debugging* to begin debugging your application in *OpenShift Dev Spaces*.
+
+image:start_debugging.png[]
+
+* You will be prompted to open the debugging port *9229*. Click *Yes* to accept and proceed.
+
+image:open_debugging_port.png[]
+
+* A pop-up will ask if you want to open a new tab for your Node.js application. Click *Open in New Tab*.
+
+* image:open_app_in_debug_mode.png[]
+
+* Another pop-up will ask if you want to allow external website access. Click *Open* to confirm.
+
+image:confirm_open_app.png[]
+
+* To continue the application’s execution, click the Resume button in the debugger.
+
+image:resume_app.png[]
+
+* You can now add a watch to the variable *savedMessages* to monitor its value during execution.
+
+image:add_Watch_savedMessages.png[]
+
+* Let’s add a new record to the *GuestBook*. For example, submit a new message through the GuestBook interface: "Hello World from Ella!".
+
+image:hello_world_from_Ella.png[]
+
+*	In the debugger’s upper menu, select Step Over to advance the execution line by line.
+
+image:step_over.png[]
+
+* You will see all the messages that have been submitted, displayed through the savedMessages variable.
+
+image:watch_messages.png[]
+
+* Once you’re done, you can stop the debugger and terminate the debugging session.
+
+image:stop_debugger.png[]
+
+
+---
 
 oc login -u opentlc-mgr -p r3dh4t1!
 
