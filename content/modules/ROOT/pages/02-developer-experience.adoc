@@ -334,6 +334,8 @@ mongostat -u admin -p password --authenticationDatabase admin
 
 image:mongostat_command_not_found.png[]
 
+---
+
 * Fear not, it’s easy to customize the *UDI* to create your own custom container with the additional tools you need. 
 * In the next steps, we will build a custom image based on the /8Universal Developer Image* after adding the *MongoDB database tools* using the following *Dockerfile*:
 
@@ -365,15 +367,15 @@ oc apply -f ./build/imagestream.yaml
 ```bash
 oc apply -f build/buildconfig.yaml 
 ```
-
 * Finally, use the following command to start building the custom image:
 ```bash
 oc start-build guestbook-dev-environment
 ```
-
 * You should see an output similar to the following:
 
 image:build_custom_udi.png[]
+
+---
 
 * You can now view the new image we created by switching to the *ImageStreams view* in your *OpenShift Console*.
 
@@ -390,6 +392,8 @@ image:new_image_stream.png[]
 
 image:lab_2_4_devfile.png[]
 
+---
+
 * Let’s test the *mongostat* command again in our terminal by running the following:
 
 ```bash
@@ -402,11 +406,18 @@ image:mongostat_results.png[]
 
 * To stop monitoring and exit the command, press CTRL+C.
 
+---
+
 == Lab 2.5 Switch to a new project
 
 * As a developer, it’s common to switch between different projects to perform tasks like implementing new features in a project or fixing defects in another project.
 * On a local development environment, this often requires supporting different technology stacks on the developer’s laptop, which can lead to conflicts due to dependency mismatches.
 * With *OpenShift Dev Spaces*, switching between projects is much easier. You simply spin up a new *workspace* for your new project, avoiding local setup conflicts.
+
+image:project_switch.png[]
+
+---
+
 * Let’s try this by creating a new *workspace* for an *Apache Camel* project, based on this branch of the GitHub repository:
 ** https://github.com/relessawy/devspaces_guestbook/tree/Lab2.5
 
@@ -414,6 +425,8 @@ image:mongostat_results.png[]
 * For this lab, choose the option to close your current running workspace before starting a new one.
 
 image:close_running_workspace.png []
+
+---
 
 * Once your new workspace is running, you’ll notice that a set of new extensions is being installed. 
 These extensions, defined in ’.vscode/extensions.json’, are configured to help you work with *Apache Camel*. as follows:
@@ -432,11 +445,16 @@ These extensions, defined in ’.vscode/extensions.json’, are configured to he
 ```
 
 * The most notable extension is *Kaoto*, a visual editor for Camel routes.
+
+---
+
 * Allow the extensions to fully install in your new workspace.
 * Press SHIFT+CTRL+P or SHIFT+CMD+P on Mac to open the command palette.
 * Select the command *Camel: Create a Camel Route using YAML DSL*
 
 image:create_camel_route_using_yaml_dsl.png[]
+
+---
 
 * Choose a name for your route, for example: *sample-route*.
 
@@ -446,15 +464,21 @@ image:create_sample_route.png[]
 
 image:choose_option_3.png[]
 
+---
+
 * The Camel route will now be displayed in the *Kaoto editor*, allowing you to visually edit, test, and run your Camel route.
 * In Task Manger, run the task *Run Camel application with JBang*
 
 image:run_camel_route.png[]
 
+---
+
 * You will see the results of running the sample route in the terminal.
 * Press CTRL+C to stop running the Camel application.
 
 image:camel_route_run.png[]
+
+---
 
 == Module 2 Conclusion
 
