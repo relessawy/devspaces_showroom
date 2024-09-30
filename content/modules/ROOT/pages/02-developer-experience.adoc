@@ -266,7 +266,7 @@ image:message_trace.png[]
 * As part of the inner loop capabilities, you can test and debug your application directly within your *workspace* in *OpenShift Dev Spaces*.
 * First, terminate the *Run Application* task to allow us to start the application in *debug mode*.
 
-* image:terminate_task.png[]
+image:terminate_task.png[]
 
 * Open the main application file *app.j*s* and add a *breakpoint* at *line 39*. * Copy the variable saveMessages in your clipboard. 
 
@@ -321,22 +321,88 @@ image:stop_debugger.png[]
 
 ---
 
-oc login -u opentlc-mgr -p r3dh4t1!
+== Lab 2.4 Customizing the Universal Developer Image (UDI)
 
-oc apply -f imagestream.yaml
+* One of the things you might want to do is monitor the performance of your *MongoDB* instance using a command like *mongostat*.
 
-oc apply -f build/buildconfig.yaml 
+* Let’s try running this command in a new terminal. 
 
-oc start-build guestbook-dev-environment
-
+```bash
 mongostat -u admin -p password --authenticationDatabase admin
+```
+* Unfortunately, you will see that this command is not available in your workspace because it is not part of the Universal Developer Image (UDI).
 
---plugin registery
+image:mongostat_command_not_found.png[]
 
-pluginRegistry:
-      openVSXURL: 'https://open-vsx.org'
+* Fear not, it’s easy to customize the *UDI* to create your own custom container with the additional tools you need. 
+* In the next steps, we will build a custom image based on the /8Universal Developer Image* after adding the *MongoDB database tools* using the following *Dockerfile*:
 
---CAmel workspcae
+```bash
+FROM registry.redhat.io/devspaces/udi-rhel8:3.5
+
+RUN curl -fsSL -o mongodb-database-tools-x86_64.rpm https://fastdl.mongodb.org/tools/db/mongodb-database-tools-rhel80-x86_64-100.7.0.rpm && \
+    dnf install -y ./mongodb-database-tools-x86_64.rpm; \
+    rm -f ./mongodb-database-tools-x86_64.rpm
+```
+
+* In your terminal, use the following command to log in as an admin: 
+
+```bash
+oc login -u opentlc-mgr -p r3dh4t1!
+```
+
+* Make sure you are in the project *user1-devspaces* 
+
+```bash
+oc project user1-devspaces
+```
+
+* Next, create a new *image stream* in *OpenShift* by applying the configuration file:
+```bash
+oc apply -f ./build/imagestream.yaml
+```
+* Now, create the *BuildConfig* that will be used to build the new custom image:
+```bash
+oc apply -f build/buildconfig.yaml 
+```
+
+* Finally, use the following command to start building the custom image:
+```bash
+oc start-build guestbook-dev-environment
+```
+
+* You should see an output similar to the following:
+
+image:build_custom_udi.png[]
+
+* You can now view the new image we created by switching to the *ImageStreams view* in your *OpenShift Console*.
+
+image:new_image_stream.png[]
+---
+
+* To test the new custom developer image, we need to point to it in our *devfile*.
+* For simplicity, this change has already been implemented for you in the devfile hosted in this branch of the GitHub repository:
+** https://github.com/relessawy/devspaces_guestbook/tree/Lab2.4
+* Let’s stop and delete your current workspace to apply the new changes.
+* Now, create a new *workspace* based on the updated devfile in the GitHub repository.
+* Feel free to examine the updated *devfile*  in your workspace.  
+* Note that the image for the Node.js container is now pointing to the custom image we created earlier.
+
+image:lab_2_4_devfile.png[]
+
+* Let’s test the *mongostat* command again in our terminal by running the following:
+
+```bash
+mongostat -u admin -p password --authenticationDatabase admin
+```
+
+* This time, the command runs successfully, and you can see the performance statistics from your *MongoDB* instance.
+
+image:mongostat_results.png[]
+
+* To stop monitoring and exit the command, press CTRL+C.
+
+== Lab 2.5 Switch to a new project
 
 
 curl -Ls https://sh.jbang.dev | bash -s - app setup
