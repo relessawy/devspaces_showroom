@@ -188,7 +188,7 @@ image::devfile_anatomy.png[]
 
 ---
 
-== Module Conclusion
+== Module 1 Conclusion
 
 * In this module, you’ve walked through the steps of installing *OpenShift Dev Spaces* using an operator and successfully created your first *CheCluster*. 
 * Beyond the installation, you’ve also explored the core components that make *OpenShift Dev Spaces* such a powerful tool for cloud-native development.
