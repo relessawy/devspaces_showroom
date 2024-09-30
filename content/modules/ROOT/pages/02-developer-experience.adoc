@@ -54,7 +54,7 @@ image::dev_spaces_dashboard.png[]
 
 * Let’s create a workspace for the *GuestBook* project.
 * Paste the following link to the GitHub repository into the field **Git Repo URL** within the dashboard to import the project.
-** https://github.com/relessawy/devspaces_guestbook/
+** https://github.com/relessawy/devspaces_workshop/
 * Click the **Create & Open** button
 
 image::import_from_git.png[]
@@ -188,7 +188,7 @@ image::missing_mongodb.png[]
 ```
 
 * To simply this step, we've already included the new components in the *devfile* hosted in this branch of the git repository:
-** https://github.com/relessawy/devspaces_guestbook/tree/Lab2.2
+** https://github.com/relessawy/devspaces_workshop/tree/Lab2.2
 * Go ahead an delete your current workspace, by clicking on the *Kebab* icon (three vertical dots) next to it and select *Delete Workspace*
 
 image::delete_workspace.png[]
@@ -384,7 +384,7 @@ image:new_image_stream.png[]
 
 * To test the new custom developer image, we need to point to it in our *devfile*.
 * For simplicity, this change has already been implemented for you in the devfile hosted in this branch of the GitHub repository:
-** https://github.com/relessawy/devspaces_guestbook/tree/Lab2.4
+** https://github.com/relessawy/devspaces_workshop/tree/Lab2.4
 * Let’s stop and delete your current workspace to apply the new changes.
 * Now, create a new *workspace* based on the updated devfile in the GitHub repository.
 * Feel free to examine the updated *devfile*  in your workspace.  
@@ -419,7 +419,7 @@ image:project_switch.png[]
 ---
 
 * Let’s try this by creating a new *workspace* for an *Apache Camel* project, based on this branch of the GitHub repository:
-** https://github.com/relessawy/devspaces_guestbook/tree/Lab2.5
+** https://github.com/relessawy/devspaces_workshop/tree/Lab2.5
 
 * Note that, as a policy, a developer can only run one workspace at a time to optimize resources. In the coming labs, we will explore how to change this policy.
 * For this lab, choose the option to close your current running workspace before starting a new one.
@@ -501,4 +501,4 @@ In this module, we explored how *OpenShift Dev Spaces* significantly enhances th
 === Switching Projects with Ease
 * Finally, we demonstrated how *OpenShift Dev Spaces* simplifies the process of switching between projects. 
 * Instead of dealing with potential conflicts on a local machine, we quickly spun up a new workspace for an *Apache Camel* project. 
-* This *workspace *came with pre-installed extensions, including a visual editor for creating and running Camel routes, showcasing how flexible and efficient project management can be in *OpenShift Dev Spaces*.
+* This *workspace* came with pre-installed extensions, including a visual editor for creating and running Camel routes, showcasing how flexible and efficient project management can be in *OpenShift Dev Spaces*.

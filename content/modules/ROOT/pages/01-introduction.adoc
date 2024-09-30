@@ -15,9 +15,7 @@
 === Accessing the OpenShift Console
 
 * Begin by logging into your **OpenShift console** as a cluster admin.
-* Your moderator will provide the Console URL, and the credentials are as follows:
-** **user**: opentlc-mgr
-** **password**: r3dh4t1!
+* Your moderator will provide the Console URL, and the credentials.
 
 ---
 
@@ -86,6 +84,8 @@ NOTE: This code configures the *Dev Spaces workspace* to pull plugins from the l
 * Once there, switch to the *Topology view* to visually monitor the status of the pods associated with *OpenShift Dev Spaces*.
 * Keep an eye on the pods until all are fully operational and show a status of ‘Running’ (dark blue circle around pod).
 
+NOTE: It may take up to 5 minutes for all the pods to be up and running.
+
 image::dev_spaces_topology_view.png[]
 
 ---
@@ -99,32 +99,27 @@ image::dev_spaces_topology_view.png[]
 * The *User Dashboard* is the central landing page for OpenShift Dev Spaces, where users can access and manage their workspaces. 
 * It is designed to provide a simple yet powerful interface for interacting with various workspace functionalities.
 
-==== 2. Devfiles Registry
-
-* The *Devfiles Registry* contains templates for *devfiles*, which are YAML files that describe and configure development environments. 
-* *Devfiles* simplify project onboarding by defining everything from source code repositories to build and runtime environments. 
-* We will dive deeper into *workspaces* and *devfiles* in the following sections.
-
-==== 3. Plugin Registry 
+==== 2. Plugin Registry 
 
 * The *Plugin Registry* stores a variety of plugins that can extend the development environment. 
 * These plugins may provide additional language support, developer tools, or integrations with external services.
 
-==== 4. Dev Spaces Server
+==== 3. Dev Spaces Server
 
  * The *Dev Spaces Server* is the central orchestrator of the platform. 
  * It manages the creation, management, and deletion of workspaces, handling key tasks like authentication, authorization, user profiles, and integration with other services.
 
-==== 5. The Gateway
+==== 4. The Gateway
 
 * The *Gateway*, based on *Traefik*, acts as the secure entry point for routing traffic efficiently between the user’s workspace and external networks.
-* It directs requests to various components of *OpenShift Dev Spaces*, such as the *User Dashboard*, *Devfile Registry*, *Dev Spaces Server*, *Plugin Registry*, and individual user workspaces.
+* It directs requests to various components of *OpenShift Dev Spaces*, such as the *User Dashboard*, *Dev Spaces Server*, *Plugin Registry*, and individual user workspaces.
 * The *Gateway* is critical for integrating external services and tools, providing controlled access while maintaining network security and isolation essential for collaborative development activities.
 
 image::dev_spaces_components.png[]
 
-* Now that we’ve covered the core components of *OpenShift Dev Spaces*, it’s time to dive deeper into two important concepts: *workspaces** and *devfiles*. 
+* Now that we’ve covered the core components of *OpenShift Dev Spaces*, it’s time to dive deeper into two important concepts: *workspaces* and *devfiles*. 
 * Let’s start by exploring what a *workspace* is and why it is critical to your development process in the next section.
+
 ---
 
 == What is a Workspace?
@@ -150,19 +145,22 @@ image::dev_spaces_components.png[]
 * At the heart of this paradigm is the *Devfile*, a powerful YAML configuration file used by **OpenShift Dev Spaces**. 
 * *Devfiles* act as comprehensive blueprints for setting up development environments, defining everything from runtime environments to the necessary tools and commands needed for a project.
 
+---
 
 === Features and Benefits of Devfiles
 
-	• *Automation-Ready*: *Devfiles* are designed to automate the setup of development environments, reducing manual configuration errors and speeding up the onboarding process for new developers.
-	•*Version Controlled*: Like any other piece of code, *Devfiles* can be versioned using standard source control tools. This allows you to track changes, roll back to previous configurations, and ensure that every team member is working with the same environment settings.
-	• *Consistent & Portable*: *Devfiles* provide a consistent development environment across different machines or platforms. This portability ensures that developers can work seamlessly, irrespective of whether they are coding locally or in a cloud environment.
+	* *Automation-Ready*: *Devfiles* are designed to automate the setup of development environments, reducing manual configuration errors and speeding up the onboarding process for new developers.
+	* *Version Controlled*: Like any other piece of code, *Devfiles* can be versioned using standard source control tools. This allows you to track changes, roll back to previous configurations, and ensure that every team member is working with the same environment settings.
+	* *Consistent & Portable*: *Devfiles* provide a consistent development environment across different machines or platforms. This portability ensures that developers can work seamlessly, irrespective of whether they are coding locally or in a cloud environment.
+
+---
 
 === Anatomy of a Devfile
 
 ==== Projects (Optional)
 
 * The *Projects* section is used to specify source code repositories that are essential for the development environment. 
-*  It includes details like the repository URL and the specific branch, tag, or commit to be used, ensuring that the *workspace* is pre-populated with the correct code version upon initialization.
+* It includes details like the repository URL and the specific branch, tag, or commit to be used, ensuring that the *workspace* is pre-populated with the correct code version upon initialization.
 
 ==== Components: 
 
@@ -175,8 +173,8 @@ image::dev_spaces_components.png[]
 ==== Commands (Optional): 
 
 * The **Commands** section outlines specific actions that can be executed within the development environment, such as build, run, and test commands. 
-* These commands are defined to automate tasks and facilitate a consistent development workflow across different environments. 
-* Each command can specify a working directory, an associated container, and the actual command line to execute.
+* These *commands* are defined to automate tasks and facilitate a consistent development workflow across different environments. 
+* Each *command* can specify a working directory, an associated container, and the actual command line to execute.
 
 ==== Events (Optional): 
 

@@ -1,0 +1,35 @@
+= Security and Governance
+
+
+== Security & RBAC
+
+Each user is assinged a project in OpenShift Dev Spaces to host their workspaces.
+Projects can be assigned by OpenShift Dev Spaces autontically or can be assigned through the use of projects templates to allow for more control and policy enforcemnts as we will see in the coming labs.
+Each user is granted permissions only to their project, and will not be able to access other user’s resources.
+
+oc get clusterroles | grep cheworkspaces
+
+oc get rolebindings | grep cheworkspace
+
+
+== Optimizing Resources
+
+== Enforcing Polices
+
+=== Disable Auto Provisioning 
+
+By default, OpenShift Dev Spaces will provision a unique <username>-devspaces project for each user. Alternatively, the cluster administrator can disable project self-provisioning on the OpenShift level, and turn off automatic namespace provisioning in the CheCluster custom resource:
+
+devEnvironments:
+  defaultNamespace:
+    autoProvision: false
+
+This setup allows achieving curated access to the Dev Spaces, where cluster administrators control provisioning for each user and can explicitly configure various settings including resource limits and quotas.
+
+
+* PVC Strategy
+* Add project to sample project?
+* No of running wrokspaces
+* Switch to intelliJ
+* Stop Autoprovisioning
+* NaaS -> create onboarding project with project template
