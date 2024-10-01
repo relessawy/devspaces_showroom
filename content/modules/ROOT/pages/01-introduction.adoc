@@ -12,6 +12,10 @@
 
 == Lab 1: Installing OpenShift Dev Spaces
 
+NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the installation steps for *OpenShift Dev Spaces*.
+
+video::01_install_dev_spaces.mp4[]
+
 === Accessing the OpenShift Console
 
 * Begin by logging into your **OpenShift console** as a cluster admin.

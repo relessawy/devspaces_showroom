@@ -249,6 +249,8 @@ image::open_web_app.png[]
 
 * You should now see the *GuestBook* application running in a separate tab.
 
+NOTE: Make sure the route URL starts with HTTP and not HTTPS.
+
 image:my_guest_book.png[]
 
 ---
@@ -270,9 +272,11 @@ image:install_mongodb_for_vscode_ext.png[]
 * Click on the Connect button to create a connection with *Connection String*. 
 * Establish a connection to the GuestBook database using the following connection string:
 
-```yaml
+[source, role="execute"]
+----
 mongodb://user:password@localhost:27017/guestbook
-```
+----
+
 image:establish_connection_to_mongodb.png[]
 
 ---
@@ -315,7 +319,7 @@ image:open_debugging_port.png[]
 
 * A pop-up will ask if you want to open a new tab for your Node.js application. Click *Open in New Tab*.
 
-* image:open_app_in_debug_mode.png[]
+image:open_app_in_debug_mode.png[]
 
 * Another pop-up will ask if you want to allow external website access. Click *Open* to confirm.
 
