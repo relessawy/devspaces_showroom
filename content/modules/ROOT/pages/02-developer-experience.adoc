@@ -151,7 +151,7 @@ image:extensions_file.png[]
 
 image::run_command.png[]
 
-* This command will execute an ’npm install’ to fetch the necessary dependencies, followed by running the application using ’Node.js’.
+* This command will execute an `npm install` to fetch the necessary dependencies, followed by running the application using `Node.js`.
 * Uh oh, we’ve run into a problem! The application is unable to run because the *GuestBook *project requires *MongoDB* to operate properly.
 
 image::missing_mongodb.png[]
@@ -191,16 +191,39 @@ image::missing_mongodb.png[]
 
 * To simply this step, we've already included the new components in the *devfile* hosted in this branch of the git repository:
 ** https://github.com/relessawy/devspaces_workshop/tree/Lab2.2
-* Go ahead an delete your current workspace, by clicking on the *Kebab* icon (three vertical dots) next to it and select *Delete Workspace*
+* Instead of manually creating a new workspace from a repository every time, wouldn’t it be great if we had all our workspaces readily available in the *OpenShift Dev Spaces Dashboard?*
+* *OpenShift Dev Spaces* can parse a JSON file that contains key details about each workspace, such as its name, description, and the URL of the *Devfile* it uses to configure the environment.
+* This configuration is handled through a *ConfigMap* named `getting-started-samples`.
+* Your workspace already includes a JSON file called `getting-started-samples.json`, which contains the configuration for the workspaces needed in our labs. Feel free to explore this file to see how the workspaces are defined.
+* Let’s configure the *OpenShift Dev Spaces Dashboard* to use the predefined workspaces.
+* Open a new terminal in your workspace
 
-image::delete_workspace.png[]
+image::open_new_terminal.png[]
+
+* Execute the following command to create a new *ConfigMap* from the *JSON* file:
+
+[source, role="execute"]
+----
+ oc create configmap getting-started-samples --from-file=getting-started-samples.json -n openshift-operators
+----
+* Add the necessary labels to the ConfigMap by running the following command:
+[source, role="execute"]
+----
+ oc label configmap getting-started-samples app.kubernetes.io/part-of=che.eclipse.org app.kubernetes.io/component=getting-started-samples -n openshift-operators
+----
+
+* Refresh your *OpenShift Dev Spaces Dashboard*
+* You will now see new projects add to your dashboard including one called *GuestBook Lab 2.2*.
+* Go ahead and select the *GuestBook Lab 2.2* project
+
+image::updated_dasboard.png[]
 
 ---
 
-* Return to the *Create Workspace* page and provide the new URL in the designated field.
-* Click the button *Create & Open* to create the workspace with MongoDB included.
+* Note that, as that *OpenShift Dev Spaces* is configured so that a developer can only run one workspace at a time to optimize resources. In the coming labs, we will explore how to change this policy.
+* For this lab, choose the option to close your current running workspace before starting a new one.
 
-image::workspace_with_mongodb.png[]
+image::close_and_open_new_workspace.png[]
 
 ---
 
