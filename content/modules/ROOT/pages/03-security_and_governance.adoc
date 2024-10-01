@@ -54,8 +54,6 @@ This setup allows achieving curated access to the Dev Spaces, where cluster admi
 
 
 * PVC Strategy
-* Add project to sample project?
 * No of running wrokspaces
-* Switch to intelliJ
 * Stop Autoprovisioning
 * NaaS -> create onboarding project with project template

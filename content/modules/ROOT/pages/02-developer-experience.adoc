@@ -206,7 +206,9 @@ image::open_new_terminal.png[]
 ----
  oc create configmap getting-started-samples --from-file=getting-started-samples.json -n openshift-operators
 ----
+
 * Add the necessary labels to the ConfigMap by running the following command:
+
 [source, role="execute"]
 ----
  oc label configmap getting-started-samples app.kubernetes.io/part-of=che.eclipse.org app.kubernetes.io/component=getting-started-samples -n openshift-operators
@@ -216,19 +218,19 @@ image::open_new_terminal.png[]
 * You will now see new projects add to your dashboard including one called *GuestBook Lab 2.2*.
 * Go ahead and select the *GuestBook Lab 2.2* project
 
-image::updated_dasboard.png[]
+image::updated_dashboard.png[]
 
 ---
 
-* Note that, as that *OpenShift Dev Spaces* is configured so that a developer can only run one workspace at a time to optimize resources. In the coming labs, we will explore how to change this policy.
+* Note that *OpenShift Dev Spaces* is configured so that a developer can only run one workspace at a time to optimize resources. In the coming labs, we will explore how to change this policy.
 * For this lab, choose the option to close your current running workspace before starting a new one.
 
 image::close_and_open_new_workspace.png[]
 
 ---
 
-* The OpenShift Dev Spaces server will process the updated *devfile*.
-* As the workspace restarts, switch back to OpenShift to inspect the pods. 
+* The *OpenShift Dev Spaces* server will process the updated *devfile*.
+* As the workspace restarts, switch back to the *OpenShift* console to inspect the pods. 
 * You’ll now see that the pod hosting your workspace is spinning up three containers instead of two.
 * Upon inspecting the pod, you’ll find that a *mongo* container is now part of your deployment.
 
