@@ -464,9 +464,9 @@ image:mongostat_results.png[]
 image:project_switch.png[]
 
 ---
-NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the steps to run a CAmel route in OpenShift Dev Spaces.
+NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the steps to run a Camel route in OpenShift Dev Spaces.
 
-video::video::02_3_testing_and_debugging.mp4[]
+video::02_3_testing_and_debugging.mp4[]
 
 * In your *OpenShift Dev Spaces Dashboard* select the workspace *Camel Project*.
 * Once your new workspace is running, you’ll notice that a set of new extensions is being installed. 

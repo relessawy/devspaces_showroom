@@ -26,17 +26,85 @@
 
 == Lab 3.1 Setup Granular Access
 
-* In this lab, we will configure granular access to OpenShift Dev Spaces. Specifically, we will allow access for *Eddie* while denying access for *Ella*.
+NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the steps to setup granular access.
 
-networking:
-    auth:
+video::03_1_Granular_Access.mp4[]
+
+* In this lab, we will configure granular access to OpenShift Dev Spaces.
+* We will create three new users in OpenShift, *Eddie*, *Ella* and *Marc*.
+* We will allow access for users *admin*, *eddie* and *ella*, but not for *marc*, by adding the following configuration to our CheCluster Custom Resource Definition:
+
+```yaml
       advancedAuthorization:
         allowUsers:
-          - eddie
-        denyUsers:
-          - ella
-       
+          - admin
+		  - eddie
+		  - ella
+```     
+---
 
+=== Lab 3.1.1 Create new users
+
+* Follow these commands to create a new htpasswd file: 
+
+[source, role="execute"]
+----
+htpasswd -c -B -b new_users eddie openshift 
+---- 
+
+[source, role="execute"]
+----
+htpasswd -B -b new_users ella openshift
+----
+
+[source, role="execute"]
+----
+htpasswd -B -b new_users marc openshift 
+----
+
+---
+
+* In your *OpenShift Console* click on *Administration* on the left menu, then select *Cluster Setting*.
+* Then select the *Configuration tab.
+* Scroll down to select *OAuth*, then select the *HTPASSWD* option.
+
+image::oauth_httpwd.png[]
+
+03_1_Granular_Access
+
+* Browse and select the file you created.
+* Finally click the *Add* button.
+
+image::add_users.png[]
+
+--- 
+
+=== Lab 3.1.2 Add configuration to CheCluster CRD
+
+* Navigate back to the *Installed Operators*, and click on *Red Hat OpenShift Dev Spaces instance Specification* next to *Red HAt OpenShift Dev Spaces* operator.
+
+image::select_provided_api.png[]
+
+* Select the *devspaces* CheCluster.
+
+image::select_checluster.png[]
+
+* Switch to the Yaml view and add the following configuration: 
+
+```yaml
+      advancedAuthorization:
+        allowUsers:
+          - admin
+		  - eddie
+		  - ella
+``` 
+
+* Save your configuration by clicking the *Save* button.
+* Feel free to test your configuration using the three new created users.
+
+image::apply_granular_access.png[]
+
+---
 
 == Optimizing Resources
 
