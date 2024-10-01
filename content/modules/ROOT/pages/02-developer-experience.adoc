@@ -59,6 +59,8 @@ image::dev_spaces_dashboard.png[]
 
 image::import_from_git.png[]
 
+NOTE: You can choose to start your workspace using either *Microsoft Visual Studio Code* or *JetBrains IntelliJ IDEA*, depending on your preferred development tool.
+
 ---
 
 * It will take the *Dev Spaces server* a few minutes to process the *devfile* and spin up your *workspace*.
@@ -78,16 +80,16 @@ image::trust_authors.png[]
 
 * Now that your *workspace* is set up, let’s switch back to the *OpenShift* console to see what happened behind the scenes during this process.
 * In the top left corner of the OpenShift console, click the *Project dropdown list* to view all projects.
-* You will notice a new project called *user1-devspaces*.has been automatically created for you. 
-* This project was automatically created by *OpenShift Dev Spaces* as your personal development environment based on the *devfile* configuration.
+* You will notice a new project called *admin-devspaces* has been automatically created for you. 
+* This project was automatically created by *OpenShift Dev Spaces* to host your personal development environment based on the *devfile* configuration.
 
 image::project_list.png[]
 
-* Select **user1-devspaces** to switch to this project.
+* Select **admin-devspaces** to switch to this project.
 
 ---
 
-* Let’s take a closer look at the pod hosting your *workspace* within the *user1-devspaces* project. 
+* Let’s take a closer look at the pod hosting your *workspace* within the *admin-devspaces* project. 
 
 image::workspace_pod.png[]
 
@@ -112,20 +114,20 @@ image::workspace_containers.png[]
 
 image::guestbook_devfile.png[]
 
-==== 1 Components
+==== 1. Components
 * We start by listing our components, In this case, the *devfile* defines a Node.js container that provides the runtime for the *GuestBook* application.
 
 
-==== 2 Universal Developer Image (UDI)
+==== 2. Universal Developer Image (UDI)
 * We are are using the *Universal Developer Image (UDI)* to create this container.
 * The *UDI* is a versatile image that includes all the essential runtimes and tools developers need to code efficiently, making it an ideal choice for development environments.
 
-==== 3 Volume
+==== 3. Volume
 
 * Next, we define a volume named NPM to store our dependencies.
 * This volume ensures that our dependencies are preserved across container restarts and development sessions.
 
-==== 4 Commands
+==== 4. Commands
 
 * Lastly, we define the commands that can be executed within the *workspace*. 
 * In the case of the *GuestBook* project, we have commands to build and run the application, allowing us to easily execute project-related tasks from within the workspace.
@@ -139,7 +141,7 @@ image::guestbook_devfile.png[]
 
 image:task_manager_ext.png[]
 
-* Any extensions defined in the ’extensions.json’ file located under the ’.vscode’ folder will automatically be pre-installed in your *workspace*. 
+* Any extensions defined in the `extensions.json` file located under the `.vscode` folder will automatically be pre-installed in your *workspace*. 
 * This ensures a standardized development environment for all developers working on the *GuestBook* project.
 
 image:extensions_file.png[]
@@ -353,10 +355,10 @@ RUN curl -fsSL -o mongodb-database-tools-x86_64.rpm https://fastdl.mongodb.org/t
 oc login -u opentlc-mgr -p r3dh4t1!
 ```
 
-* Make sure you are in the project *user1-devspaces* 
+* Make sure you are in the project *admin-devspaces* 
 
 ```bash
-oc project user1-devspaces
+oc project admin-devspaces
 ```
 
 * Next, create a new *image stream* in *OpenShift* by applying the configuration file:
