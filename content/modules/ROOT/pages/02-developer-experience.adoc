@@ -358,17 +358,19 @@ image:stop_debugger.png[]
 
 * Let’s try running this command in a new terminal. 
 
-```bash
+[source, role="execute"]
+----
 mongostat -u admin -p password --authenticationDatabase admin
-```
-* Unfortunately, you will see that this command is not available in your workspace because it is not part of the Universal Developer Image (UDI).
+----
+
+* Unfortunately, you will see that this command is not available in your workspace because it is not part of the *Universal Developer Image (UDI)*.
 
 image:mongostat_command_not_found.png[]
 
 ---
 
 * Fear not, it’s easy to customize the *UDI* to create your own custom container with the additional tools you need. 
-* In the next steps, we will build a custom image based on the /8Universal Developer Image* after adding the *MongoDB database tools* using the following *Dockerfile*:
+* In the next steps, we will build a custom image based on the *Universal Developer Image* after adding the *MongoDB database tools* using the following *Dockerfile*:
 
 ```bash
 FROM registry.redhat.io/devspaces/udi-rhel8:3.5
@@ -378,30 +380,42 @@ RUN curl -fsSL -o mongodb-database-tools-x86_64.rpm https://fastdl.mongodb.org/t
     rm -f ./mongodb-database-tools-x86_64.rpm
 ```
 
-* In your terminal, use the following command to log in as an admin: 
 
-```bash
-oc login -u opentlc-mgr -p r3dh4t1!
-```
+* In your terminal, make sure you are in the project *admin-devspaces* 
 
-* Make sure you are in the project *admin-devspaces* 
-
-```bash
+[source, role="execute"]
+----
 oc project admin-devspaces
-```
+----
 
 * Next, create a new *image stream* in *OpenShift* by applying the configuration file:
-```bash
+
+[source, role="execute"]
+----
 oc apply -f ./build/imagestream.yaml
-```
+----
+
 * Now, create the *BuildConfig* that will be used to build the new custom image:
-```bash
+
+[source, role="execute"]
+----
 oc apply -f build/buildconfig.yaml 
-```
+----
+
 * Finally, use the following command to start building the custom image:
-```bash
+
+[source, role="execute"]
+----
 oc start-build guestbook-dev-environment
-```
+----
+
+* You can check the build logs using this command:
+
+[source, role="execute"]
+----
+oc logs build/guestbook-dev-environment-1
+----
+
 * You should see an output similar to the following:
 
 image:build_custom_udi.png[]
@@ -411,14 +425,15 @@ image:build_custom_udi.png[]
 * You can now view the new image we created by switching to the *ImageStreams view* in your *OpenShift Console*.
 
 image:new_image_stream.png[]
+
 ---
 
 * To test the new custom developer image, we need to point to it in our *devfile*.
 * For simplicity, this change has already been implemented for you in the devfile hosted in this branch of the GitHub repository:
 ** https://github.com/relessawy/devspaces_workshop/tree/Lab2.4
-* Let’s stop and delete your current workspace to apply the new changes.
-* Now, create a new *workspace* based on the updated devfile in the GitHub repository.
-* Feel free to examine the updated *devfile*  in your workspace.  
+* In your *OpenShift Dev Spaces Dashboard* switch to the *workspace* *GuestBook Lab2.4*
+* Just like before, choose the option to close running workspace (guestbook-lab2-2) and restart
+* Feel free to examine the updated *devfile* in your workspace.  
 * Note that the image for the Node.js container is now pointing to the custom image we created earlier.
 
 image:lab_2_4_devfile.png[]
@@ -427,9 +442,10 @@ image:lab_2_4_devfile.png[]
 
 * Let’s test the *mongostat* command again in our terminal by running the following:
 
-```bash
+[source, role="execute"]
+----
 mongostat -u admin -p password --authenticationDatabase admin
-```
+----
 
 * This time, the command runs successfully, and you can see the performance statistics from your *MongoDB* instance.
 
@@ -448,19 +464,14 @@ image:mongostat_results.png[]
 image:project_switch.png[]
 
 ---
+NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the steps to run a CAmel route in OpenShift Dev Spaces.
 
-* Let’s try this by creating a new *workspace* for an *Apache Camel* project, based on this branch of the GitHub repository:
-** https://github.com/relessawy/devspaces_workshop/tree/Lab2.5
+video::video::02_3_testing_and_debugging.mp4[]
 
-* Note that, as a policy, a developer can only run one workspace at a time to optimize resources. In the coming labs, we will explore how to change this policy.
-* For this lab, choose the option to close your current running workspace before starting a new one.
-
-image:close_running_workspace.png []
-
----
-
+* In your *OpenShift Dev Spaces Dashboard* select the workspace *Camel Project*.
 * Once your new workspace is running, you’ll notice that a set of new extensions is being installed. 
-These extensions, defined in ’.vscode/extensions.json’, are configured to help you work with *Apache Camel*. as follows:
+These extensions, defined in ’.vscode/extensions.json’, are configured to help you work with *Apache Camel*.
+* The most notable extension is *Kaoto*, a visual editor for Camel routes.
 
 ```json
 {  
@@ -474,9 +485,6 @@ These extensions, defined in ’.vscode/extensions.json’, are configured to he
   ]  
 }
 ```
-
-* The most notable extension is *Kaoto*, a visual editor for Camel routes.
-
 ---
 
 * Allow the extensions to fully install in your new workspace.
@@ -492,6 +500,7 @@ image:create_camel_route_using_yaml_dsl.png[]
 image:create_sample_route.png[]
 
 * In the terminal, select Option 3 and press Enter.
+* Watch as the Camel CLI (JBang), does the heavy lifting on our behalf and creates the sample Camel route.
 
 image:choose_option_3.png[]
 
@@ -522,6 +531,9 @@ In this module, we explored how *OpenShift Dev Spaces* significantly enhances th
 === Development Environment as Code with devfiles
 * We demonstrated how developers can define and update the development environment by modifying *devfiles* and adding new components.
 * These *devfiles* can be treated as code, versioned, and maintained in a Git repository, enabling consistency and version control for development environments.
+
+=== Customize the OpenShift Dev Spaces Dashboard
+* We demonstrated how to add quick access to workspaces in our *OpenShift Dev Spaces Dashboard*, making it easier to switch between workspaces.
 
 === The Inner Loop with OpenShift Dev Spaces
 * We explored the inner loop capabilities of *OpenShift Dev Spaces*, where developers can run, test, and debug their applications directly within the *workspace*, mimicking the functionality of a local development environment but in the cloud.

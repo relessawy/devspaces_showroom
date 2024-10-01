@@ -1,3 +1,4 @@
 * Modules
 ** xref:01-introduction.adoc[1. Introduction to OpenShift Dev Spaces]
 ** xref:02-developer-experience.adoc[2. Developer Experience]
+** xref:03-security_and_governance.adoc[3. Security and Governance]

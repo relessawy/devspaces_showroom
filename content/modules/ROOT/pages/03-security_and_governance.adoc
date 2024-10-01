@@ -3,13 +3,12 @@
 
 == Security & RBAC
 
-Each user is assinged a project in OpenShift Dev Spaces to host their workspaces.
-Projects can be assigned by OpenShift Dev Spaces autontically or can be assigned through the use of projects templates to allow for more control and policy enforcemnts as we will see in the coming labs.
-Each user is granted permissions only to their project, and will not be able to access other user’s resources.
-Only authenticated OpenShift users can access Red Hat OpenShift Dev Spaces. The Gateway Pod rejects unauthenticated users
-Users who are not allowed will not be able to use Red Hat OpenShift Dev Spaces and will see the warning shown in this figure
-Admins can setup  up granular access for different groups and users by adding this configuration to the OpenShift Dev Spaces Custom Resource:
+* Each user is assigned a dedicated project in *OpenShift Dev Spaces* to host their workspaces.
+* Projects can be assigned either automatically by *OpenShift Dev Spaces* or through the use of project templates to allow for more control and policy enforcement, as we will explore in upcoming labs.
+* Each user is granted permissions only to their own project, meaning they cannot access other users’ resources.
+* Administrators can set up granular access controls for different groups and users by adding the following configuration to the OpenShift Dev Spaces Custom Resource:
 
+```yaml
  networking:
     auth:
       advancedAuthorization:
@@ -23,10 +22,11 @@ Admins can setup  up granular access for different groups and users by adding th
           - team-b
         denyGroups:          
           - team-c
+```
 
 == Lab 3.1 Setup Granular Access
 
-* In this lab we will allow access to eddie while denying ella access to OpenShift Dev Spaces.
+* In this lab, we will configure granular access to OpenShift Dev Spaces. Specifically, we will allow access for *Eddie* while denying access for *Ella*.
 
 networking:
     auth:
