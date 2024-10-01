@@ -30,14 +30,6 @@ image::three_by_three_matrix.png[]
 
 ---
 
-* You will be prompted to log in using your *OpenShift* credentials. Please use the following:
-** username: user1
-** password: openshift
-
-image::login_with_openshift.png[]
-
----
-
 * On the *Authorize Access* screen, click the *Allow Select Permissions* button to grant the necessary permissions.
 
 image::authorize_access.png[]
@@ -54,7 +46,12 @@ image::dev_spaces_dashboard.png[]
 
 * Let’s create a workspace for the *GuestBook* project.
 * Paste the following link to the GitHub repository into the field **Git Repo URL** within the dashboard to import the project.
-** https://github.com/relessawy/devspaces_workshop/
+
+[source, role="execute"]
+----
+https://github.com/relessawy/devspaces_workshop/
+----
+
 * Click the **Create & Open** button
 
 image::import_from_git.png[]
@@ -82,10 +79,9 @@ image::trust_authors.png[]
 * In the top left corner of the OpenShift console, click the *Project dropdown list* to view all projects.
 * You will notice a new project called *admin-devspaces* has been automatically created for you. 
 * This project was automatically created by *OpenShift Dev Spaces* to host your personal development environment based on the *devfile* configuration.
+* Select **admin-devspaces** to switch to this project.
 
 image::project_list.png[]
-
-* Select **admin-devspaces** to switch to this project.
 
 ---
 
@@ -110,7 +106,7 @@ image::workspace_containers.png[]
 === Lab 2.1.4: Examine the Guestbook devfile
 
 * Let’s return to your *VSCode* tab in the browser to take a closer look at the *devfile* used for our *GuestBook* project. 
-* This devfile serves as the blueprint for setting up the development environment.
+* This *devfile* serves as the blueprint for setting up the development environment.
 
 image::guestbook_devfile.png[]
 
@@ -152,7 +148,7 @@ image:extensions_file.png[]
 image::run_command.png[]
 
 * This command will execute an `npm install` to fetch the necessary dependencies, followed by running the application using `Node.js`.
-* Uh oh, we’ve run into a problem! The application is unable to run because the *GuestBook *project requires *MongoDB* to operate properly.
+* Uh oh, we’ve run into a problem! The application is unable to run because the *GuestBook* project requires *MongoDB* to operate properly.
 
 image::missing_mongodb.png[]
 
@@ -160,7 +156,7 @@ image::missing_mongodb.png[]
 
 == Lab 2.2 Adding components to the devfile
 
-* To resolve this, we need to inject an additional MongoDB component into our *devfile*, similar to the following yaml snippet:
+* To resolve this, we need to inject an additional *MongoDB *component into our *devfile*, by using the following yaml snippet:
 
 ```yaml
 - name: mongo
@@ -191,8 +187,8 @@ image::missing_mongodb.png[]
 
 * To simply this step, we've already included the new components in the *devfile* hosted in this branch of the git repository:
 ** https://github.com/relessawy/devspaces_workshop/tree/Lab2.2
-* Instead of manually creating a new workspace from a repository every time, wouldn’t it be great if we had all our workspaces readily available in the *OpenShift Dev Spaces Dashboard?*
-* *OpenShift Dev Spaces* can parse a JSON file that contains key details about each workspace, such as its name, description, and the URL of the *Devfile* it uses to configure the environment.
+* Instead of manually creating a new workspace from a repository every time, wouldn’t it be great if we had all our *workspaces* readily available in the *OpenShift Dev Spaces Dashboard*?
+* *OpenShift Dev Spaces* can parse a *JSON* file that contains key details about each workspace, such as its name, description, and the URL of the *devfile* it uses to configure the environment.
 * This configuration is handled through a *ConfigMap* named `getting-started-samples`.
 * Your workspace already includes a JSON file called `getting-started-samples.json`, which contains the configuration for the workspaces needed in our labs. Feel free to explore this file to see how the workspaces are defined.
 * Let’s configure the *OpenShift Dev Spaces Dashboard* to use the predefined workspaces.
@@ -214,16 +210,16 @@ image::open_new_terminal.png[]
  oc label configmap getting-started-samples app.kubernetes.io/part-of=che.eclipse.org app.kubernetes.io/component=getting-started-samples -n openshift-operators
 ----
 
-* Refresh your *OpenShift Dev Spaces Dashboard*
+* Refresh your *OpenShift Dev Spaces Dashboard*.
 * You will now see new projects add to your dashboard including one called *GuestBook Lab 2.2*.
-* Go ahead and select the *GuestBook Lab 2.2* project
+* Go ahead and select the *GuestBook Lab 2.2* project.
 
 image::updated_dashboard.png[]
 
 ---
 
-* Note that *OpenShift Dev Spaces* is configured so that a developer can only run one workspace at a time to optimize resources. In the coming labs, we will explore how to change this policy.
-* For this lab, choose the option to close your current running workspace before starting a new one.
+* Note that *OpenShift Dev Spaces* is configured so that a developer can only run one workspace at a time to optimize resources. In module 3, we will explore how to change this policy.
+* For this lab, choose the option to close running workspace (guestbook) and restart.
 
 image::close_and_open_new_workspace.png[]
 
@@ -241,7 +237,7 @@ image::workspace_pod_with_3_containers.png[]
 * Feel free to explore the updated *devfile* in this *workspace*.
 * Let's do another build and run for our application.
 * Once again, select and run the command *Run the application command* under the *devfile* section in *Task Manager*.
-* As we might expect, tha application connects successfully to the mongo database, and we get a popup asking if we want to Open our Guest Book application in a new tab.
+* As we might expect, tha application connects successfully to the mongo database, and we get a popup asking if we want to open our *GuestBook* application in a new tab.
 * Click the *Open in New Tab* button.
 * Confirm the action to allow VSCode to open the external site by clicking *Open*.
 
@@ -259,6 +255,10 @@ image:my_guest_book.png[]
 
 * Now that we have our *GuestBook* application up and running in *OpenShift Dev Spaces*, it’s time to start testing and debugging the application, just as you would in a local development environment. 
 * In this lab, we will demonstrate how to leverage the inner loop capabilities of *OpenShift Dev Spaces* to debug and inspect your application within the cloud-native workspace.
+
+NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the steps to test and debug an application in *OpenShift Dev Spaces*.
+
+video::02_3_testing_and_debugging.mp4[]
 
 ---
 
