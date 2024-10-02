@@ -42,6 +42,7 @@ image::dev_spaces_operator.png[]
 
 * Follow the on-screen instructions on the *Install Operator* screen to configure the installation settings.
 * Keep the default settings and click the *Install* button to initiate the installation process.
+* Please do not change the *Installed Namespaces* option; keep it set to *openshift-operators*.
 
 image::install_dev_spaces_operator.png[]
 
