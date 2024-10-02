@@ -41,8 +41,8 @@ image::dev_spaces_operator.png[]
 ---
 
 * Follow the on-screen instructions on the *Install Operator* screen to configure the installation settings.
-* Keep the default settings and click the *Install* button to initiate the installation process.
 * Please do not change the *Installed Namespaces* option; keep it set to *openshift-operators*.
+* Keep the default settings and click the *Install* button to initiate the installation process.
 
 image::install_dev_spaces_operator.png[]
 
@@ -86,8 +86,9 @@ NOTE: This code configures the *Dev Spaces workspace* to pull plugins from the l
 ---
 
 * Switch to the *Developer Perspective* within the OpenShift console. 
+* Search and click on the *openshift-operators* project.
 * Once there, switch to the *Topology view* to visually monitor the status of the pods associated with *OpenShift Dev Spaces*.
-* Keep an eye on the pods until all are fully operational and show a status of ‘Running’ (dark blue circle around pod).
+* Keep an eye on the pods until all are fully operational and show a status of *Running* (dark blue circle around pod).
 
 NOTE: It may take up to 5 minutes for all the pods to be up and running.
 
@@ -122,8 +123,7 @@ image::dev_spaces_topology_view.png[]
 
 image::dev_spaces_components.png[]
 
-* Now that we’ve covered the core components of *OpenShift Dev Spaces*, it’s time to dive deeper into two important concepts: *workspaces* and *devfiles*. 
-* Let’s start by exploring what a *workspace* is and why it is critical to your development process in the next section.
+* Now that we’ve covered the core components of *OpenShift Dev Spaces*, it’s time to dive deeper into the concept of  *workspaces*. 
 
 ---
 
@@ -139,64 +139,11 @@ image::dev_spaces_components.png[]
 	• *Command Line Interfaces (CLIs)*: Direct access to OpenShift CLIs and other essential tools right from your workspace, enabling seamless interaction with your applications and services.
 	• *Binaries*: Essential binaries to run various processes such as application servers or message brokers are part of your workspace, ensuring you have everything you need to get your applications up and running.
 
-* In the next section, we will deep dive into *Devfiles*. 
-* We’ll explore how they enable the *Development Environment as Code* paradigm, making it easier to automate, version control, and manage your development environments.
-
-== Development Environment as Code with Devfiles
-
-* The concept of *Development Environment as Code* represents a significant shift in the way we set up and manage development environments. 
-* By treating these configurations as code, developers can leverage automation, apply version control, and ensure consistency across various setups. 
-* This approach simplifies the complex process of configuring individual environments and aligns it with modern DevOps practices.
-* At the heart of this paradigm is the *Devfile*, a powerful YAML configuration file used by **OpenShift Dev Spaces**. 
-* *Devfiles* act as comprehensive blueprints for setting up development environments, defining everything from runtime environments to the necessary tools and commands needed for a project.
-
----
-
-=== Features and Benefits of Devfiles
-
-	* *Automation-Ready*: *Devfiles* are designed to automate the setup of development environments, reducing manual configuration errors and speeding up the onboarding process for new developers.
-	* *Version Controlled*: Like any other piece of code, *Devfiles* can be versioned using standard source control tools. This allows you to track changes, roll back to previous configurations, and ensure that every team member is working with the same environment settings.
-	* *Consistent & Portable*: *Devfiles* provide a consistent development environment across different machines or platforms. This portability ensures that developers can work seamlessly, irrespective of whether they are coding locally or in a cloud environment.
-
----
-
-=== Anatomy of a Devfile
-
-==== Projects (Optional)
-
-* The *Projects* section is used to specify source code repositories that are essential for the development environment. 
-* It includes details like the repository URL and the specific branch, tag, or commit to be used, ensuring that the *workspace* is pre-populated with the correct code version upon initialization.
-
-==== Components: 
-
-* *Components* are the building blocks of the development environment. The can be of type:
-. *Container*: Defines the container image containing the runtime environment, development tools, and dependencies.
-. *Kubernetes/OpenShift Resources*: Incorporates Kubernetes or OpenShift-specific resources such as Routes and BuildConfigs into the workspace.
-. *Volume*: Provides persistent storage necessary for certain data within the development environment.
-. *Plugin*: Extends the capabilities of the development environment by adding IDE features or integrating additional tools and services.
-
-==== Commands (Optional): 
-
-* The **Commands** section outlines specific actions that can be executed within the development environment, such as build, run, and test commands. 
-* These *commands* are defined to automate tasks and facilitate a consistent development workflow across different environments. 
-* Each *command* can specify a working directory, an associated container, and the actual command line to execute.
-
-==== Events (Optional): 
-
-* The *Events* section in a *devfile* handles the lifecycle events of the workspace, such as pre-start, post-start, pre-stop, and post-stop events.
-* These events trigger specific commands at different stages of the workspace lifecycle, enabling the setup or teardown of services and tools necessary for the development process.
-* This mechanism ensures that certain tasks are automatically handled at the appropriate times, enhancing both the efficiency and reliability of the development environment.
-
-image::devfile_anatomy.png[]
-
----
-
 == Module 1 Conclusion
 
 * In this module, you’ve walked through the steps of installing *OpenShift Dev Spaces* using an operator and successfully created your first *CheCluster*. 
 * Beyond the installation, you’ve also explored the core components that make *OpenShift Dev Spaces* such a powerful tool for cloud-native development.
-* Additionally, we’ve taken a deep dive into the concepts of *workspaces* and *devfiles*.
+* Additionally, we’ve taken a deep dive into the concept *workspaces*.
 
-* With the foundation in place, it’s time to see how *OpenShift Dev Spaces* improves the developer onboarding process.
-* In the next section, you will experience how easy it is to onboard new developers, set up their environments, and get them started with minimal configuration. 
-* Stay tuned as we guide you through this hands-on experience of onboarding developers, showcasing how *OpenShift Dev Spaces* ensures that new team members can jump right into development, reducing setup time and eliminating barriers to productivity.
+* With the foundation in place, it’s time to see how *OpenShift Dev Spaces* streamlines the developer experience.
+* Stay tuned as we guide you through this hands-on experience, showcasing how *OpenShift Dev Spaces* ensures that new team members can jump right into development, reducing setup time and eliminating barriers to productivity.
