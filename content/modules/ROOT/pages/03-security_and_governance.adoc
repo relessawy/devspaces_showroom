@@ -149,8 +149,6 @@ oc patch checluster/devspaces -n openshift-operators \
 
 NOTE: You can watch this short video to show those policies in action.
 
-NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the steps to set up granular access.
-
 video::03_2_1_Enforcing_Policies.mp4[]
 
 ---
@@ -241,7 +239,6 @@ oc apply -f name-space-config.yaml
 ----
 
 * Now, log in to OpenShift Dev Spaces with a new user, and watch as it automatically spins up a new onboarding workspace for that user.
-
 
 NOTE: You can watch this short video that provides a walkthrough of the steps to apply new policies on project creation.
 
