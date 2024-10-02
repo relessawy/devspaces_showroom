@@ -2,8 +2,8 @@
 
 * In this module, we focus on the critical aspects of security and governance in *OpenShift Dev Spaces*.
 * Managing access control, resource policies, and workspace provisioning is essential to ensure that your development environment remains efficient, secure, and well-governed.
-* Through a combination of Security & RBAC and Policy Enforcement, we will demonstrate how to configure granular access controls, set up limits on workspace usage, and manage storage policies. 
-* By the end of this module, you’ll understand how to apply security best practices and governance policies in your OpenShift Dev Spaces environment, helping you to optimize resource usage and enforce standards across your development teams.
+* We will demonstrate how to configure granular access controls, set up limits on workspace usage, and manage storage policies. 
+* By the end of this module, you’ll understand how to apply security best practices and governance policies in your *OpenShift Dev Spaces* environment, helping you to optimize resource usage and enforce standards across your development teams.
 
 == Security & RBAC
 
@@ -109,12 +109,16 @@ image::apply_granular_access.png[]
 
 ---
 
-== LAb 3.2 Modifying Default Polices
+== Lab 3.2 Modifying Default Polices
 
-* *OpenShift Dev Spaces* is setup with a few policies by default that are designed to optimize the resource utilization of the CehCluster. Some of these policies includes:
+* *OpenShift Dev Spaces* is setup with a few policies by default that are designed to optimize the resource utilization of the CheCluster. Some of these policies includes:
 ** The maximum number of workspaces a user can run simultaneously.
 ** The total number of workspaces a user can maintain.
 ** The storage type used for workspaces, whether it’s per user, per workspace, or ephemeral.
+
+NOTE: There are many more policies that can be customized, please refer to the official documentation for a full list of policies.
+
+---
 
 === Lab 3.2.1 Modify workspace policies
 
@@ -141,9 +145,11 @@ oc patch checluster/devspaces -n openshift-operators \
 
 * Now, if you try to spin up a second workspace, OpenShift Dev Spaces will allow you to run it alongside your *Camel Project* workspace.
 * However, if you return to your *Dashboard* and attempt to start a fifth workspace, *OpenShift Dev Spaces* will not allow it. 
-* This time will not get the option to stop an existing workspace in order to start a new one, respecting the limit of 4 simultaneous workspaces that we’ve enforced.
+* This time, you will not get the option to stop an existing workspace in order to start a new one, respecting the limit of 4 simultaneous workspaces that we’ve enforced.
 
 NOTE: You can watch this short video to show those policies in action.
+
+NOTE: Before proceeding with the lab instructions, you can watch this short video that provides a walkthrough of the steps to set up granular access.
 
 video::03_2_1_Enforcing_Policies.mp4[]
 
@@ -160,23 +166,17 @@ video::03_2_1_Enforcing_Policies.mp4[]
 
 image::change_storage_type.png[]
 
+NOTE: You can watch this short video that provides a walkthrough of the steps to modify storage options.
+
+video::03_2_2_Storage_Options.mp4[]
 
 ---
 
 
 === Lab 3.3 Enforcing Policies and Limits on Workspace Creation
 
-* By default, *OpenShift Dev Spaces* provisions a unique <username>-devspaces project for each user.
-* Alternatively, a *cluster administrator* can disable project self-provisioning at the OpenShift level and turn off automatic namespace provisioning in the *CheCluster* custom resource:
-
-```yaml
-devEnvironments:
-  defaultNamespace:
-    autoProvision: false
-```	
-
-* This setup enables curated access to Dev Spaces, allowing administrators to control workspace provisioning for each user. Administrators can explicitly configure settings such as resource limits and quotas.
-* It can also be used to automate onboarding for users from different teams by creating an onboarding workspace that includes all relevant information specific to their team.
+* We would like to enable curated access to *OpenShift Dev Spaces*, allowing administrators to control workspace provisioning for each user. * Administrators can explicitly configure settings such as resource limits and quotas on project creation.
+* We can also automate the creation of onboarding workspaces that includes all relevant information specific to users based on there teams. 
 * To implement this process, let’s first install the Namespace Configuration Operator.
 * Next, apply the following Namespace Configuration:
 
@@ -226,8 +226,9 @@ spec:
 
 * Once the namespace configuration finds a matching condition, it will apply the policies and limits to the newly created project.
 * It will also automatically trigger the creation of a new onboarding workspace for the developer.
+* Create a file called name-space-config.yaml with the content of the above yaml code.
 
-* Aplly the name space configuration policies
+* Apply the namespace configuration policies
 
 [source, role="execute"]
 ----
@@ -240,6 +241,11 @@ oc apply -f name-space-config.yaml
 ----
 
 * Now, log in to OpenShift Dev Spaces with a new user, and watch as it automatically spins up a new onboarding workspace for that user.
+
+
+NOTE: You can watch this short video that provides a walkthrough of the steps to apply new policies on project creation.
+
+video::03_3_Applying_Project_Policies.mp4[]
 
 ---
 
