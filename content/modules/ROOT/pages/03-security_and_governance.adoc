@@ -109,7 +109,7 @@ image::apply_granular_access.png[]
 
 ---
 
-== Enforcing Polices
+== LAb 3.2 Modifying Default Polices
 
 * *OpenShift Dev Spaces* is setup with a few policies by default that are designed to optimize the resource utilization of the CehCluster. Some of these policies includes:
 ** The maximum number of workspaces a user can run simultaneously.
@@ -164,7 +164,7 @@ image::change_storage_type.png[]
 ---
 
 
-=== Enforcing policies on workspace creation
+=== Lab 3.3 Enforcing Policies and Limits on Workspace Creation
 
 * By default, *OpenShift Dev Spaces* provisions a unique <username>-devspaces project for each user.
 * Alternatively, a *cluster administrator* can disable project self-provisioning at the OpenShift level and turn off automatic namespace provisioning in the *CheCluster* custom resource:
