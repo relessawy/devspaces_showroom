@@ -1,5 +1,9 @@
 = Security and Governance
 
+* In this module, we focus on the critical aspects of security and governance in *OpenShift Dev Spaces*.
+* Managing access control, resource policies, and workspace provisioning is essential to ensure that your development environment remains efficient, secure, and well-governed.
+* Through a combination of Security & RBAC and Policy Enforcement, we will demonstrate how to configure granular access controls, set up limits on workspace usage, and manage storage policies. 
+* By the end of this module, you’ll understand how to apply security best practices and governance policies in your OpenShift Dev Spaces environment, helping you to optimize resource usage and enforce standards across your development teams.
 
 == Security & RBAC
 
@@ -160,18 +164,93 @@ image::change_storage_type.png[]
 ---
 
 
-=== Disable Auto Provisioning 
+=== Enforcing policies on workspace creation
 
-By default, OpenShift Dev Spaces will provision a unique <username>-devspaces project for each user. Alternatively, the cluster administrator can disable project self-provisioning on the OpenShift level, and turn off automatic namespace provisioning in the CheCluster custom resource:
+* By default, *OpenShift Dev Spaces* provisions a unique <username>-devspaces project for each user.
+* Alternatively, a *cluster administrator* can disable project self-provisioning at the OpenShift level and turn off automatic namespace provisioning in the *CheCluster* custom resource:
 
+```yaml
 devEnvironments:
   defaultNamespace:
     autoProvision: false
+```	
 
-This setup allows achieving curated access to the Dev Spaces, where cluster administrators control provisioning for each user and can explicitly configure various settings including resource limits and quotas.
+* This setup enables curated access to Dev Spaces, allowing administrators to control workspace provisioning for each user. Administrators can explicitly configure settings such as resource limits and quotas.
+* It can also be used to automate onboarding for users from different teams by creating an onboarding workspace that includes all relevant information specific to their team.
+* To implement this process, let’s first install the Namespace Configuration Operator.
+* Next, apply the following Namespace Configuration:
 
+```yaml
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: NamespaceConfig
+metadata:
+  name: onboarding-namespaceconfig
+spec:
+  annotationSelector:
+    matchExpressions:
+      - key: che.eclipse.org/username
+        operator: Exists
+  templates:
+    - objectTemplate: |
+        apiVersion: v1
+        kind: ResourceQuota
+        metadata:
+          name: standard-sandbox
+          namespace: {{ .Name }}
+        spec:
+          hard:
+            pods: "4"
+    - objectTemplate: |
+        kind: DevWorkspace
+        apiVersion: workspace.devfile.io/v1alpha2
+        metadata:
+          name: onboarding-workspace
+          namespace: {{ .Name }}
+        spec:
+          routingClass: che
+          started: true
+          contributions:
+            - name: ide
+              uri: "https://raw.githubusercontent.com/wael2000/devspaces/main/pipelines/devfile.yaml"
+          template:
+            projects:
+              - name: onboarding-docs
+                git:
+                  remotes:
+                    origin: https://github.com/eclipse-che/che-docs
+            components:
+              - name: tooling-container
+                container:
+                  image: quay.io/devfile/universal-developer-image:ubi8-latest
+```	
 
-* PVC Strategy
-* No of running wrokspaces
-* Stop Autoprovisioning
-* NaaS -> create onboarding project with project template
+* Once the namespace configuration finds a matching condition, it will apply the policies and limits to the newly created project.
+* It will also automatically trigger the creation of a new onboarding workspace for the developer.
+
+* Aplly the name space configuration policies
+
+[source, role="execute"]
+----
+oc project openshift-operators
+----
+
+[source, role="execute"]
+----
+oc apply -f name-space-config.yaml 
+----
+
+* Now, log in to OpenShift Dev Spaces with a new user, and watch as it automatically spins up a new onboarding workspace for that user.
+
+---
+
+== Module Conclusion
+
+* In this module, we have explored various aspects of security and governance in *OpenShift Dev Spaces*.
+
+You learned how to:
+
+	1.	Set up granular access controls using the RBAC features of OpenShift Dev Spaces to ensure users can only access their own resources and define specific access for users and teams.
+	2.	Modify workspace and storage policies to limit the number of simultaneous workspaces, manage overall workspace limits, and enforce storage policies tailored to the needs of different projects.
+	3.	Control workspace provisioning through namespace management, allowing administrators to customize resource quotas and automate onboarding workspaces, improving resource utilization and user experience.
+
+By enforcing these policies and practices, you ensure a secure, organized, and efficient development environment, allowing for better control over resources, more tailored user experiences, and enhanced security in multi-user and multi-project setups.
