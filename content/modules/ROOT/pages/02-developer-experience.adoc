@@ -210,7 +210,7 @@ image::missing_mongodb.png[]
 
 == Lab 2.2 Adding components to the devfile
 
-* To resolve this, we need to inject an additional *MongoDB *component into our *devfile*, by using the following yaml snippet:
+* To resolve this, we need to inject an additional *MongoDB* component into our *devfile*, by using the following yaml snippet:
 
 ```yaml
 - name: mongo
@@ -272,16 +272,13 @@ image::open_new_terminal.png[]
 * Refresh your *OpenShift Dev Spaces Dashboard*.
 * You will now see new projects add to your dashboard including one called *GuestBook Lab 2.2*.
 
+image::updated_dashboard.png[]
+
 ---
 
 === Lab 2.2.2: Create GuestBook Lab 2.2 workspace
 
 * Go ahead and select the *GuestBook Lab 2.2* project.
-
-image::updated_dashboard.png[]
-
----
-
 * Note that *OpenShift Dev Spaces* is configured so that a developer can only run one workspace at a time to optimize resources. In module 3, we will explore how to change this policy.
 * For this lab, choose the option to close running workspace (guestbook) and restart.
 
@@ -365,7 +362,8 @@ image:message_trace.png[]
 
 image:terminate_task.png[]
 
-* Open the main application file *app.j*s* and add a *breakpoint* at *line 39*. * Copy the variable saveMessages in your clipboard. 
+* Open the main application file *app.js* and add a *breakpoint* at *line 39*. 
+* Copy the variable saveMessages in your clipboard. 
 
 image:add_break_point.png[]
 
@@ -479,7 +477,7 @@ oc start-build guestbook-dev-environment
 
 [source, role="execute"]
 ----
-oc logs build/guestbook-dev-environment-1
+oc logs -f build/guestbook-dev-environment-1
 ----
 
 * You should see an output similar to the following:
@@ -495,8 +493,6 @@ image:new_image_stream.png[]
 ---
 
 * To test the new custom developer image, we need to point to it in our *devfile*.
-* For simplicity, this change has already been implemented for you in the devfile hosted in this branch of the GitHub repository:
-** https://github.com/relessawy/devspaces_workshop/tree/Lab2.4
 * In your *OpenShift Dev Spaces Dashboard* switch to the *workspace* *GuestBook Lab2.4*
 * Just like before, choose the option to close running workspace (guestbook-lab2-2) and restart
 * Feel free to examine the updated *devfile* in your workspace.  
@@ -590,8 +586,8 @@ image:camel_route_run.png[]
 
 In this module, we explored how *OpenShift Dev Spaces* significantly enhances the developer experience by providing a cloud-native, fully customizable, and efficient development environment.
 
-=== Streamlining the Onboarding Process
-* We began by walking through the onboarding process for a new developer joining a project.
+=== Streamlining the developer experience
+* We began by showcasing a streamlined process for a new developer joining a project.
 * With *OpenShift Dev Spaces*, the developer accessed a link to the project and had a fully configured development environment within minutes—without any manual setup.
 
 === Development Environment as Code with devfiles
