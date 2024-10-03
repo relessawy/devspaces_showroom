@@ -300,7 +300,7 @@ image::workspace_pod_with_3_containers.png[]
 * Feel free to explore the updated *devfile* in this *workspace*.
 * Let's do another build and run for our application.
 * Once again, select and run the command *Run the application command* under the *devfile* section in *Task Manager*.
-* As we might expect, tha application connects successfully to the mongo database, and we get a popup asking if we want to open our *GuestBook* application in a new tab.
+* As we might expect, the application connects successfully to the mongo database, and we get a popup asking if we want to open our *GuestBook* application in a new tab.
 * Click the *Open in New Tab* button.
 * Confirm the action to allow VSCode to open the external site by clicking *Open*.
 
